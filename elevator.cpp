@@ -1,6 +1,6 @@
-#include "elevator.h"
+#include "Elevator.h"
 
-Elevator::Elevator(int id): elevatorID(id)
+Elevator::Elevator(int id, Floor* floor): elevatorID(id), currentFloor(floor)
 {
 
 }

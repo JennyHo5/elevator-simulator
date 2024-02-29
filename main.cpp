@@ -2,6 +2,7 @@
 #include "Passenger.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include "Ecs.h"
 
 #include <QApplication>
 
@@ -9,22 +10,31 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    // Initalize 3 Passengers, 3 Elevators and 7 Floors
-    Passenger passenger1(1);
-    Passenger passenger2(2);
-    Passenger passenger3(3);
-    Elevator elevator1(1);
-    Elevator elevator2(2);
-    Elevator elevator3(3);
-    Elevator elevator4(4);
-    Elevator elevator5(5);
-    Elevator elevator6(6);
-    Elevator elevator7(7);
+    // Initalize 7 floors
     Floor floor1(1);
     Floor floor2(2);
     Floor floor3(3);
+    Floor floor4(4);
+    Floor floor5(5);
+    Floor floor6(6);
+    Floor floor7(7);
 
-    MainWindow w;
+    // 3 Elevators are initaly at Floor 1
+    Elevator elevator1(1, &floor1);
+    Elevator elevator2(2, &floor1);
+    Elevator elevator3(3, &floor1);
+
+    // 3 Passengers are initaly at Floor 1
+    Passenger passenger1(1, &floor1);
+    Passenger passenger2(2, &floor1);
+    Passenger passenger3(3, &floor1);
+
+    ECS ecs;
+    ecs.addPassenger(&passenger1);
+    ecs.addPassenger(&passenger2);
+    ecs.addPassenger(&passenger3);
+
+    MainWindow w(&ecs);
     w.show();
 
 

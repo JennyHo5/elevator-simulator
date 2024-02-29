@@ -40,7 +40,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QSpinBox" name="spinBox">
+           <widget class="QSpinBox" name="passengerSpinBox">
             <property name="minimum">
              <number>1</number>
             </property>
@@ -50,7 +50,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="passengerIDSubmitButton">
+           <widget class="QPushButton" name="okButton">
             <property name="text">
              <string>OK</string>
             </property>
@@ -61,6 +61,9 @@
        </item>
        <item>
         <widget class="QGroupBox" name="floorGroupBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="title">
           <string>Floor View</string>
          </property>
@@ -91,6 +94,9 @@
        </item>
        <item>
         <widget class="QGroupBox" name="elevatorGroupBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="title">
           <string>Elevator View</string>
          </property>
@@ -228,7 +234,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTextBrowser" name="textBrowser"/>
+        <widget class="QTextEdit" name="outputText"/>
        </item>
       </layout>
      </widget>
