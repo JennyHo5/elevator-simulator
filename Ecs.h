@@ -10,7 +10,7 @@ class ECS
 {
 public:
     ECS();
-    ~ECS();
+
     void addPassenger(Passenger*);
     Passenger* getPassengerById(int id) {return passengers[id - 1];}
     void addElevator(Elevator*);

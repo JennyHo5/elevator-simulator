@@ -9,6 +9,8 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     ui->setupUi(this);
     connect(ui->okButton, SIGNAL(pressed()), this, SLOT(onOkButtonClicked()));
     connect(ui->upButton, SIGNAL(pressed()), this, SLOT(onUpButtonClicked()));
+    connect(ui->downButton, SIGNAL(pressed()), this, SLOT(onDownButtonClicked()));
+    connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
 }
 
 MainWindow::~MainWindow()
@@ -21,8 +23,8 @@ void MainWindow::onOkButtonClicked()
 {
     selectedPassengerID = ui->passengerSpinBox->value();
     selectedPassenger = ecs->getPassengerById(selectedPassengerID);
-    qInfo("Selected passenger:");
-    selectedPassenger->print();
+    emit messageReceived("[Admin] Selected passenger " + QString::number(selectedPassengerID));
+
     if (selectedPassenger->isInside())
     {
         ui->elevatorGroupBox->setEnabled(true);
@@ -37,7 +39,17 @@ void MainWindow::onOkButtonClicked()
 
 void MainWindow::onUpButtonClicked()
 {
-    qInfo("Passenger %d pressed UP button on floor %d", selectedPassengerID, selectedPassenger->getCurrentFloor()->getFloorNumber());
+    emit messageReceived("[Passenger " + QString::number(selectedPassengerID) + "] Pressed UP button on floor " + QString::number(selectedPassenger->getCurrentFloor()->getFloorNumber()));
     ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::UP);
+    emit messageReceived("[ECS] Added floor request: Floor " + QString::number(selectedPassenger->getCurrentFloor()->getFloorNumber()) + " requests to go UP");
 }
 
+void MainWindow::onDownButtonClicked() {
+    emit messageReceived("[Passenger " + QString::number(selectedPassengerID) + "] Pressed DOWN button on floor " + QString::number(selectedPassenger->getCurrentFloor()->getFloorNumber()));
+    ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::DOWN);
+    emit messageReceived("[ECS] Added floor request: Floor " + QString::number(selectedPassenger->getCurrentFloor()->getFloorNumber()) + " requests to go DOWN");
+}
+
+void MainWindow::updateTextWidget(const QString& message) {
+    ui->outputText->append(message);
+}

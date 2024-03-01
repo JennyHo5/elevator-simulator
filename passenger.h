@@ -12,8 +12,6 @@ public:
     bool isInside() const {return beInside;}
     const Floor* getCurrentFloor() const {return currentFloor;}
 
-    void print() const;
-
 private:
     int passengerID;
     Floor* currentFloor;

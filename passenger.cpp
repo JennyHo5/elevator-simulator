@@ -8,7 +8,3 @@ Passenger::Passenger(int id, Floor* floor):
     beInside(false)
 {
 }
-
-void Passenger::print() const {
-    qInfo("Passenger %d on floor %d", passengerID, currentFloor->getFloorNumber());
-}

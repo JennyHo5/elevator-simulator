@@ -24,9 +24,16 @@ public:
 private slots:
     void onOkButtonClicked();
     void onUpButtonClicked();
+    void onDownButtonClicked();
+    void updateTextWidget(const QString& message);
+
+// Define custom signals
+signals:
+    void messageReceived(const QString& message);
 
 private:
     Ui::MainWindow *ui;
+
     int selectedPassengerID;
     Passenger* selectedPassenger;
     ECS* ecs;
