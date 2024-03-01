@@ -7,6 +7,7 @@
 #include <QDebug>
 #include "passenger.h"
 #include "Ecs.h"
+#include "Constants.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

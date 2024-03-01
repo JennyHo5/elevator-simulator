@@ -6,15 +6,22 @@
 #include <vector>
 #include <QDebug>
 
-class ECS
+class ECS: public QObject
 {
-public:
-    ECS();
+    Q_OBJECT
 
+public:
+    ECS(QObject* parent = nullptr): QObject(parent) {};
+    ~ECS() {}
     void addPassenger(Passenger*);
     Passenger* getPassengerById(int id) {return passengers[id - 1];}
     void addElevator(Elevator*);
     void addFloorRequest(const Floor*, Direction);
+//    void removeFloorRequest(FloorRequest);
+//    void update();
+
+signals:
+    void messageReceived(const QString& message);
 
 private:
     std::vector<Passenger*> passengers;
