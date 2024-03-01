@@ -7,7 +7,8 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     , ecs(ecs)
 {
     ui->setupUi(this);
-    connect(ui->okButton, SIGNAL(pressed()), this, SLOT (onOkButtonClicked()));
+    connect(ui->okButton, SIGNAL(pressed()), this, SLOT(onOkButtonClicked()));
+    connect(ui->upButton, SIGNAL(pressed()), this, SLOT(onUpButtonClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -18,9 +19,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOkButtonClicked()
 {
-    int selectedPassengerID = ui->passengerSpinBox->value();
-    qDebug() << "Selected passenger" << selectedPassengerID;
+    selectedPassengerID = ui->passengerSpinBox->value();
     selectedPassenger = ecs->getPassengerById(selectedPassengerID);
+    qInfo("Selected passenger:");
+    selectedPassenger->print();
     if (selectedPassenger->isInside())
     {
         ui->elevatorGroupBox->setEnabled(true);
@@ -31,5 +33,11 @@ void MainWindow::onOkButtonClicked()
         ui->floorGroupBox->setEnabled(true);
         ui->elevatorGroupBox->setEnabled(false);
     }
+}
+
+void MainWindow::onUpButtonClicked()
+{
+    qInfo("Passenger %d pressed UP button on floor %d", selectedPassengerID, selectedPassenger->getCurrentFloor()->getFloorNumber());
+    ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::UP);
 }
 

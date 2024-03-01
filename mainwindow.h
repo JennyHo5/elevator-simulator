@@ -23,9 +23,11 @@ public:
 
 private slots:
     void onOkButtonClicked();
+    void onUpButtonClicked();
 
 private:
     Ui::MainWindow *ui;
+    int selectedPassengerID;
     Passenger* selectedPassenger;
     ECS* ecs;
 };

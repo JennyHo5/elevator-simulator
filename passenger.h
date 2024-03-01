@@ -1,7 +1,6 @@
 #ifndef PASSENGER_H
 #define PASSENGER_H
 
-#include "floor.h"
 #include "elevator.h"
 
 class Passenger
@@ -11,6 +10,9 @@ public:
     void pressDirection(Direction);
     bool isOutside() const {return beOutside;}
     bool isInside() const {return beInside;}
+    const Floor* getCurrentFloor() const {return currentFloor;}
+
+    void print() const;
 
 private:
     int passengerID;

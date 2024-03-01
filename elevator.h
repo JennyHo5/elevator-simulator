@@ -3,6 +3,8 @@
 
 #include "floor.h"
 
+class Floor;
+
 class Elevator
 {
 public:

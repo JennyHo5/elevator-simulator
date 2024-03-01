@@ -30,6 +30,9 @@ int main(int argc, char *argv[])
     Passenger passenger3(3, &floor1);
 
     ECS ecs;
+    ecs.addElevator(&elevator1);
+    ecs.addElevator(&elevator2);
+    ecs.addElevator(&elevator3);
     ecs.addPassenger(&passenger1);
     ecs.addPassenger(&passenger2);
     ecs.addPassenger(&passenger3);

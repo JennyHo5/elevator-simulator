@@ -2,9 +2,10 @@
 #define FLOORREQUEST_H
 
 #include "Direction.h"
+#include "Floor.h"
 
 struct FloorRequest {
-    int floorNumber;
+    const Floor* floor;
     Direction direction;
 };
 
