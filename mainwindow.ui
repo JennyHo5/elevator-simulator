@@ -69,13 +69,6 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Floor number:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="upButton">
             <property name="text">
              <string>UP</string>

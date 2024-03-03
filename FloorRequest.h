@@ -5,7 +5,7 @@
 #include "Floor.h"
 
 struct FloorRequest {
-    const Floor* floor;
+    Floor* floor;
     Direction direction;
 };
 

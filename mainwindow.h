@@ -28,7 +28,6 @@ private slots:
     void onDownButtonClicked();
     void updateTextWidget(const QString& message);
 
-// Define custom signals
 signals:
     void messageReceived(const QString& message);
 

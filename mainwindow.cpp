@@ -12,6 +12,14 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     connect(ui->downButton, SIGNAL(pressed()), this, SLOT(onDownButtonClicked()));
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
     connect(ecs, &ECS::messageReceived, this, &MainWindow::updateTextWidget);
+    std::vector<Elevator*>* elevators = ecs->getElevators();
+    for (auto it = elevators->begin(); it != elevators->end(); it++) {
+        connect(*it, &Elevator::messageReceived, this, &MainWindow::updateTextWidget);
+    }
+    std::vector<Passenger*>* passengers = ecs->getPassengers();
+    for (auto it = passengers->begin(); it != passengers->end(); it++) {
+        connect(*it, &Passenger::messageReceived, this, &MainWindow::updateTextWidget);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -46,15 +54,16 @@ void MainWindow::onOkButtonClicked()
 
 void MainWindow::onUpButtonClicked()
 {
-    emit messageReceived("[Passenger " + QString::number(selectedPassengerID) + "] Pressed UP button on floor " + QString::number(selectedPassenger->getCurrentFloor()->getFloorNumber()));
+    selectedPassenger->pressDirection(Direction::UP);
     ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::UP);
 }
 
 void MainWindow::onDownButtonClicked() {
-    emit messageReceived("[Passenger " + QString::number(selectedPassengerID) + "] Pressed DOWN button on floor " + QString::number(selectedPassenger->getCurrentFloor()->getFloorNumber()));
+    selectedPassenger->pressDirection(Direction::DOWN);
     ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::DOWN);
 }
 
 void MainWindow::updateTextWidget(const QString& message) {
     ui->outputText->append(message);
 }
+
