@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(ECS* ecs, QWidget *parent = nullptr);
+    explicit MainWindow(ECS* ecs, QWidget *parent = nullptr);
     ~MainWindow();
 
 
@@ -27,6 +27,7 @@ private slots:
     void onUpButtonClicked();
     void onDownButtonClicked();
     void updateTextWidget(const QString& message);
+    void update();
 
 signals:
     void messageReceived(const QString& message);
@@ -37,5 +38,6 @@ private:
     int selectedPassengerID;
     Passenger* selectedPassenger;
     ECS* ecs;
+    QTimer* timer;
 };
 #endif // MAINWINDOW_H

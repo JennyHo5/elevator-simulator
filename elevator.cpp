@@ -9,6 +9,8 @@ void Elevator::moveToFloor(Floor* f) {
     // if the elevator is already on floor f
     if (f == currentFloor) {
         emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Is already on Floor " + QString::number(f->getFloorNumber()));
+        ringBell();
+        openDoor();
     }
     // if the elevator need to move
     else {

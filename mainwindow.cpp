@@ -6,7 +6,15 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     , ui(new Ui::MainWindow)
     , ecs(ecs)
 {
+    // Timer for update
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::update); // a QTimer that triggers the update() method every second
+    timer->start(1000); // Adjust the interval as needed (in milliseconds)
+
+    //UI
     ui->setupUi(this);
+
+    //Connect singals and slots
     connect(ui->okButton, SIGNAL(pressed()), this, SLOT(onOkButtonClicked()));
     connect(ui->upButton, SIGNAL(pressed()), this, SLOT(onUpButtonClicked()));
     connect(ui->downButton, SIGNAL(pressed()), this, SLOT(onDownButtonClicked()));
@@ -33,22 +41,26 @@ void MainWindow::onOkButtonClicked()
     selectedPassengerID = ui->passengerSpinBox->value();
     selectedPassenger = ecs->getPassengerById(selectedPassengerID);
     emit messageReceived("[Admin] Selected passenger " + QString::number(selectedPassengerID));
+}
 
-    // Enable the group on GUI based on where passenger is
-    if (selectedPassenger->isInside())
-    {
-        ui->elevatorGroupBox->setEnabled(true);
-        ui->floorGroupBox->setEnabled(false);
-    }
-    else if (selectedPassenger->isOutside())
-    {
-        ui->floorGroupBox->setEnabled(true);
-        ui->elevatorGroupBox->setEnabled(false);
-        // Disable button UP or DOWN based on floor
-        if (selectedPassenger->getCurrentFloor()->getFloorNumber() == 1)
-            ui->downButton->setEnabled(false);
-        else if (selectedPassenger->getCurrentFloor()->getFloorNumber() == NUM_OF_ELEVATORS)
-            ui->upButton->setEnabled(false);
+void MainWindow::update() {
+    if (selectedPassenger != nullptr) {
+        // Enable the group on GUI based on where passenger is
+        if (selectedPassenger->isInside())
+        {
+            ui->elevatorGroupBox->setEnabled(true);
+            ui->floorGroupBox->setEnabled(false);
+        }
+        else if (selectedPassenger->isOutside())
+        {
+            ui->floorGroupBox->setEnabled(true);
+            ui->elevatorGroupBox->setEnabled(false);
+            // Disable button UP or DOWN based on floor
+            if (selectedPassenger->getCurrentFloor()->getFloorNumber() == 1)
+                ui->downButton->setEnabled(false);
+            else if (selectedPassenger->getCurrentFloor()->getFloorNumber() == NUM_OF_ELEVATORS)
+                ui->upButton->setEnabled(false);
+        }
     }
 }
 
