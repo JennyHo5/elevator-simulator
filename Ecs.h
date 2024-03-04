@@ -27,8 +27,11 @@ public:
 
     std::vector<Elevator*>* getElevators() {return &elevators;}
     std::vector<Passenger*>* getPassengers() {return &passengers;}
+
+    void moveElevatorToFloor(Elevator*, Floor*);
     void moveIdle();
     void movePassenger(); //check for passengers waiting on the same floor as an idle landing elevator and send them to the elevator
+    void handleCarRequest();
 
 public slots:
     void update();

@@ -41,12 +41,44 @@ void ECS::moveIdle() {
             for (Elevator* elevator: elevators) {
                 if (elevator->getStatus() == Elevator::IDLE) {
                     // Send the idle elevator to serve the request
-                    elevator->moveToFloor(request.floor);
+                    //elevator->moveToFloor(request.floor);
+                    moveElevatorToFloor(elevator, request.floor);
                     removeFloorRequest(&request);
                     break; // Move to the next request
                 }
             }
         }
+}
+
+void ECS::moveElevatorToFloor(Elevator * e, Floor * f) {
+    if (e->getCurrentFloor() == f)
+    {
+        emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Is already on Floor " + QString::number(f->getFloorNumber()));
+        e->ringBell();
+        e->openDoor();
+    }
+    else {
+        int elevatorFloorNumber = e->getCurrentFloor()->getFloorNumber();
+        int endFloorNumber = f->getFloorNumber();
+        int floorsToMove = std::abs(elevatorFloorNumber - endFloorNumber);
+        // Set status to MOVING
+        e->setStatus(Elevator::MOVING);
+
+        for (int i = 0; i < floorsToMove; i++) {
+            if (elevatorFloorNumber > endFloorNumber) {
+                elevatorFloorNumber--;
+                e->setCurrentFloor(floors[elevatorFloorNumber - 1]);
+            } else {
+                elevatorFloorNumber++;
+                e->setCurrentFloor(floors[elevatorFloorNumber - 1]);
+            }
+            emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Arrives on Floor " + QString::number(elevatorFloorNumber));
+        }
+
+        e->ringBell();
+        e->openDoor();
+        e->setStatus(Elevator::IDLE);
+    }
 }
 
 void ECS::movePassenger() {
@@ -59,6 +91,15 @@ void ECS::movePassenger() {
                     break;
                 }
             }
+        }
+    }
+}
+
+void ECS::handleCarRequest() {
+    for (CarRequest& cr: carRequests) {
+        // if elevator is on the destinated floor, stop it
+        // if not, move it to the floor one step by one
+        if (cr.elevator->getCurrentFloor() == cr.floor) {
         }
     }
 }

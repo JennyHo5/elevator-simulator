@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     Floor floor7(7);
 
     // 3 Elevators are initaly at Floor 1
-    Elevator elevator1(1, &floor1);
+    Elevator elevator1(1, &floor7);
     Elevator elevator2(2, &floor1);
     Elevator elevator3(3, &floor1);
 
@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
 
     ECS ecs;
     ecs.addElevator(&elevator1);
-    ecs.addElevator(&elevator2);
-    ecs.addElevator(&elevator3);
+//    ecs.addElevator(&elevator2);
+//    ecs.addElevator(&elevator3);
     ecs.addPassenger(&passenger1);
     ecs.addPassenger(&passenger2);
     ecs.addPassenger(&passenger3);

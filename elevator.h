@@ -18,7 +18,8 @@ public:
     Elevator(int id, Floor* floor, QObject *parent = nullptr);
     int getStatus() const {return status;}
     void setStatus(int newStatus) {status = newStatus;}
-    void moveToFloor(Floor*);
+    void setCurrentFloorNumber(int floorNumber) {currentFloorNumber = floorNumber;}
+    void setCurrentFloor(Floor* floor) {currentFloor = floor;}
     void ringBell();
     void openDoor();
 
@@ -32,6 +33,7 @@ signals:
 private:
     int elevatorID;
     Floor* currentFloor;
+    int currentFloorNumber;
     int status;
 };
 
