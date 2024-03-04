@@ -13,3 +13,7 @@ void Elevator::ringBell() {
 void Elevator::openDoor() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Opens door on Floor " + QString::number(currentFloor->getFloorNumber()));
 }
+
+void Elevator::closeDoor() {
+    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Closes door on Floor " + QString::number(currentFloor->getFloorNumber()));
+}

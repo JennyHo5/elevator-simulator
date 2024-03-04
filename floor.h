@@ -12,6 +12,8 @@ public:
 
 private:
     int floorNumber;
+    bool requestUp;
+    bool requestDown;
 };
 
 #endif // FLOOR_H

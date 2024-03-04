@@ -7,7 +7,8 @@ Passenger::Passenger(int id, Floor* floor, QObject *parent):
     currentElevator(nullptr),
     beOutside(true),
     beInside(false),
-    beWaitingForElevator(false)
+    beWaitingForElevator(false),
+    requiredFloorNumber(0)
 {
 }
 
@@ -23,15 +24,30 @@ void Passenger::pressDirection(Direction d) {
 }
 
 void Passenger::enterElevator(Elevator* e) {
-    emit messageReceived("[Pessenger " + QString::number(passengerID) + "] Enters Elevator " + QString::number(e->getElevatorID()));
+    emit messageReceived("[Pessenger " + QString::number(passengerID) + "] Enters Elevator " + QString::number(e->getElevatorID()) + " on Floor " + QString::number(currentFloor->getFloorNumber()));
     beOutside = false;
     beInside = true;
     currentElevator = e;
     beWaitingForElevator = false;
+    connect(e, &Elevator::currentFloorChanged, this, &Passenger::updateCurrentFloor);
+}
+
+void Passenger::exitElevator() {
+    if (currentElevator != nullptr)
+        emit messageReceived("[Pessenger " + QString::number(passengerID) + "] Exit Elevator " + QString::number(currentElevator->getElevatorID()) + " on Floor " + QString::number(currentFloor->getFloorNumber()));
+    beOutside = true;
+    beInside = false;
+    disconnect(currentElevator, &Elevator::currentFloorChanged, this, &Passenger::updateCurrentFloor);
+    currentElevator = nullptr;
+    requiredFloorNumber = 0;
 }
 
 void Passenger::pressFloorNumber(int floorNumber) {
     emit floorNumberPressed(floorNumber, currentElevator);
     requiredFloorNumber = floorNumber;
     emit messageReceived("[Passenger " + QString::number(passengerID) + "] Presses floor number " + QString::number(floorNumber));
+}
+
+void Passenger::updateCurrentFloor(Floor* newFloor) {
+    currentFloor = newFloor;
 }

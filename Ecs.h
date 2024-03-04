@@ -24,6 +24,7 @@ public:
     void addFloor(Floor*);
     void addFloorRequest(Floor*, Direction);
     void removeFloorRequest(FloorRequest* request);
+    void removeCarRequest(CarRequest* request);
 
     std::vector<Elevator*>* getElevators() {return &elevators;}
     std::vector<Passenger*>* getPassengers() {return &passengers;}

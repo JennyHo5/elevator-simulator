@@ -28,6 +28,7 @@ void MainWindow::connects() {
 
     // Elevator buttons
     connect(ui->floor1Button, SIGNAL(pressed()), this, SLOT(onFloor1ButtonClicked()));
+    connect(ui->floor2Button, SIGNAL(pressed()), this, SLOT(onFloor2ButtonClicked()));
 
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
@@ -64,10 +65,18 @@ void MainWindow::update() {
             ui->floorGroupBox->setEnabled(true);
             ui->elevatorGroupBox->setEnabled(false);
             // Disable button UP or DOWN based on floor
-            if (selectedPassenger->getCurrentFloor()->getFloorNumber() == 1)
+            if (selectedPassenger->getCurrentFloor()->getFloorNumber() == 1) {
                 ui->downButton->setEnabled(false);
-            else if (selectedPassenger->getCurrentFloor()->getFloorNumber() == NUM_OF_ELEVATORS)
+                ui->upButton->setEnabled(true);
+            }
+            else if (selectedPassenger->getCurrentFloor()->getFloorNumber() == NUM_OF_ELEVATORS) {
+                ui->downButton->setEnabled(true);
                 ui->upButton->setEnabled(false);
+            }
+            else {
+                ui->downButton->setEnabled(true);
+                ui->upButton->setEnabled(true);
+            }
         }
     }
 }
@@ -93,4 +102,8 @@ void MainWindow::onFloor1ButtonClicked()
     selectedPassenger->pressFloorNumber(1);
 }
 
+void MainWindow::onFloor2ButtonClicked()
+{
+    selectedPassenger->pressFloorNumber(2);
+}
 

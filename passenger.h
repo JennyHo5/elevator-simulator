@@ -18,11 +18,18 @@ public:
 
     Floor* getCurrentFloor() const {return currentFloor;}
     void enterElevator(Elevator*);
+    void exitElevator();
     void pressFloorNumber(int floorNumber);
+    int getRequiredFloorNumber() const {return requiredFloorNumber;}
+    void setRequireFloorNumber(int number) {requiredFloorNumber = number;}
+
+public slots:
+    void updateCurrentFloor(Floor* newFloor);
 
 signals:
     void messageReceived(const QString& message);
     void floorNumberPressed(int floorNumber, Elevator* elevator);
+
 
 private:
     int passengerID;

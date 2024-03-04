@@ -33,6 +33,7 @@ void ECS::addFloorRequest(Floor* f, Direction d) {
 void ECS::update() {
     moveIdle();
     movePassenger();
+    handleCarRequest();
 }
 
 void ECS::moveIdle() {
@@ -73,6 +74,7 @@ void ECS::moveElevatorToFloor(Elevator * e, Floor * f) {
                 e->setCurrentFloor(floors[elevatorFloorNumber - 1]);
             }
             emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Arrives on Floor " + QString::number(elevatorFloorNumber));
+            emit e->currentFloorChanged(e->getCurrentFloor()); // Emit the signal when the current floor changes
         }
 
         e->ringBell();
@@ -83,7 +85,8 @@ void ECS::moveElevatorToFloor(Elevator * e, Floor * f) {
 
 void ECS::movePassenger() {
     for (Passenger* passenger: passengers) {
-        if (passenger->isWaitingForElevator()) {
+        // Move passenger that is waiting for elevator into idle elevator
+        if (passenger->isWaitingForElevator() && passenger->isOutside()) {
             for (Elevator* elevator: elevators) {
                 // If there is an idle elevator that is on the same floor of the passenger, serve the passenger with the elevator
                 if (elevator->getStatus() == Elevator::IDLE && elevator->getCurrentFloor() == passenger->getCurrentFloor()) {
@@ -92,15 +95,19 @@ void ECS::movePassenger() {
                 }
             }
         }
+        else {
+            // Move passenger that arrives on the destinated floor out
+            if (passenger->getCurrentFloor()->getFloorNumber() == passenger->getRequiredFloorNumber() && passenger->isInside()) {
+                passenger->exitElevator();
+            }
+        }
     }
 }
 
 void ECS::handleCarRequest() {
     for (CarRequest& cr: carRequests) {
-        // if elevator is on the destinated floor, stop it
-        // if not, move it to the floor one step by one
-        if (cr.elevator->getCurrentFloor() == cr.floor) {
-        }
+        moveElevatorToFloor(cr.elevator, cr.floor);
+        removeCarRequest(&cr);
     }
 }
 
@@ -121,8 +128,24 @@ void ECS::removeFloorRequest(FloorRequest* request) {
 }
 
 void ECS::addCarRequest(int floorNumber, Elevator* e) {
-    CarRequest cr = CarRequest{floors[floorNumber], e};
+    CarRequest cr = CarRequest{floors[floorNumber - 1], e};
     carRequests.push_back(cr);
     emit messageReceived("[ECS] Adds car request: Elevator " + QString::number(e->getElevatorID()) + " requests to go to Floor " + QString::number(floorNumber));
+    cr.elevator->ringBell();
+    cr.elevator->closeDoor();
+}
+
+void ECS::removeCarRequest(CarRequest *request) {
+    size_t i = 0;
+    for (; i < carRequests.size(); i++) {
+        if(&carRequests[i] == request) {
+            break;
+        }
+    }
+    if (i < carRequests.size()) {
+        carRequests.erase(carRequests.begin() + i);
+    }
+
+    emit messageReceived("[ECS] Removes car request: Elevator " + QString::number(request->elevator->getElevatorID()) + " requests to go to Floor " + QString::number(request->floor->getFloorNumber()));
 }
 

@@ -22,6 +22,7 @@ public:
     void setCurrentFloor(Floor* floor) {currentFloor = floor;}
     void ringBell();
     void openDoor();
+    void closeDoor();
 
 
     int getElevatorID() const {return elevatorID;}
@@ -29,6 +30,7 @@ public:
 
 signals:
     void messageReceived(const QString& message);
+    void currentFloorChanged(Floor* newFloor);
 
 private:
     int elevatorID;

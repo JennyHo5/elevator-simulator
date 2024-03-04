@@ -32,6 +32,7 @@ private slots:
     void update();
 
     void onFloor1ButtonClicked();
+    void onFloor2ButtonClicked();
 
 signals:
     void messageReceived(const QString& message);
