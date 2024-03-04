@@ -3,6 +3,7 @@
 
 #include "passenger.h"
 #include "FloorRequest.h"
+#include "CarRequest.h"
 #include <QTimer>
 #include <vector>
 #include <QDebug>
@@ -12,11 +13,7 @@ class ECS: public QObject
     Q_OBJECT
 
 public:
-    explicit ECS(QObject *parent = nullptr) : QObject(parent) {
-        timer = new QTimer(this);
-        connect(timer, &QTimer::timeout, this, &ECS::update); // a QTimer that triggers the update() method every second
-        timer->start(1000); // Adjust the interval as needed (in milliseconds)
-    }
+    explicit ECS(QObject *parent = nullptr);
 
     ~ECS() {
         delete timer;
@@ -24,8 +21,10 @@ public:
     void addPassenger(Passenger*);
     Passenger* getPassengerById(int id) {return passengers[id - 1];}
     void addElevator(Elevator*);
+    void addFloor(Floor*);
     void addFloorRequest(Floor*, Direction);
     void removeFloorRequest(FloorRequest* request);
+
     std::vector<Elevator*>* getElevators() {return &elevators;}
     std::vector<Passenger*>* getPassengers() {return &passengers;}
     void moveIdle();
@@ -33,6 +32,8 @@ public:
 
 public slots:
     void update();
+    void addCarRequest(int floorNumber, Elevator* e);
+
 
 signals:
     void messageReceived(const QString& message);
@@ -40,7 +41,9 @@ signals:
 private:
     std::vector<Passenger*> passengers;
     std::vector<Elevator*> elevators;
+    std::vector<Floor*> floors;
     std::vector<FloorRequest> floorRequests;
+    std::vector<CarRequest> carRequests;
     QTimer *timer;
 };
 

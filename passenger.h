@@ -18,10 +18,11 @@ public:
 
     Floor* getCurrentFloor() const {return currentFloor;}
     void enterElevator(Elevator*);
+    void pressFloorNumber(int floorNumber);
 
 signals:
     void messageReceived(const QString& message);
-
+    void floorNumberPressed(int floorNumber, Elevator* elevator);
 
 private:
     int passengerID;
@@ -30,7 +31,7 @@ private:
     bool beOutside;
     bool beInside;
     bool beWaitingForElevator;
-    Direction requireDirection;
+    int requiredFloorNumber;
 };
 
 #endif // PASSENGER_H

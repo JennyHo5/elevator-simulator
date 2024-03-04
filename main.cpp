@@ -36,6 +36,13 @@ int main(int argc, char *argv[])
     ecs.addPassenger(&passenger1);
     ecs.addPassenger(&passenger2);
     ecs.addPassenger(&passenger3);
+    ecs.addFloor(&floor1);
+    ecs.addFloor(&floor2);
+    ecs.addFloor(&floor3);
+    ecs.addFloor(&floor4);
+    ecs.addFloor(&floor5);
+    ecs.addFloor(&floor6);
+    ecs.addFloor(&floor7);
 
     MainWindow w(&ecs);
     w.show();

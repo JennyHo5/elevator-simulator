@@ -21,6 +21,8 @@ public:
     explicit MainWindow(ECS* ecs, QWidget *parent = nullptr);
     ~MainWindow();
 
+    void connects(); //Connect singals and slots
+
 
 private slots:
     void onOkButtonClicked();
@@ -28,6 +30,8 @@ private slots:
     void onDownButtonClicked();
     void updateTextWidget(const QString& message);
     void update();
+
+    void onFloor1ButtonClicked();
 
 signals:
     void messageReceived(const QString& message);

@@ -17,6 +17,7 @@ SOURCES += \
     Passenger.cpp
 
 HEADERS += \
+    CarRequest.h \
     Constants.h \
     Direction.h \
     Ecs.h \

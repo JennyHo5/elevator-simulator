@@ -25,7 +25,7 @@ void Elevator::moveToFloor(Floor* f) {
         // Connect the timeout signal of the timer to a lambda function
         connect(timer, &QTimer::timeout, [this, f, timer]() {
             // This code block will be executed after 3 seconds
-            emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Arrived at Floor " + QString::number(f->getFloorNumber()));
+            emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Arrives at Floor " + QString::number(f->getFloorNumber()));
             // Cleanup: delete the timer
             ringBell();
             openDoor();

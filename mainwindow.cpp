@@ -11,13 +11,25 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::update); // a QTimer that triggers the update() method every second
     timer->start(1000); // Adjust the interval as needed (in milliseconds)
 
-    //UI
     ui->setupUi(this);
+    connects();
+}
 
-    //Connect singals and slots
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::connects() {
+    // Floor buttons
     connect(ui->okButton, SIGNAL(pressed()), this, SLOT(onOkButtonClicked()));
     connect(ui->upButton, SIGNAL(pressed()), this, SLOT(onUpButtonClicked()));
     connect(ui->downButton, SIGNAL(pressed()), this, SLOT(onDownButtonClicked()));
+
+    // Elevator buttons
+    connect(ui->floor1Button, SIGNAL(pressed()), this, SLOT(onFloor1ButtonClicked()));
+
+    // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
     connect(ecs, &ECS::messageReceived, this, &MainWindow::updateTextWidget);
     std::vector<Elevator*>* elevators = ecs->getElevators();
@@ -28,11 +40,7 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     for (auto it = passengers->begin(); it != passengers->end(); it++) {
         connect(*it, &Passenger::messageReceived, this, &MainWindow::updateTextWidget);
     }
-}
 
-MainWindow::~MainWindow()
-{
-    delete ui;
 }
 
 
@@ -78,4 +86,11 @@ void MainWindow::onDownButtonClicked() {
 void MainWindow::updateTextWidget(const QString& message) {
     ui->outputText->append(message);
 }
+
+
+void MainWindow::onFloor1ButtonClicked()
+{
+    selectedPassenger->pressFloorNumber(1);
+}
+
 
