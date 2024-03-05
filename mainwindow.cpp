@@ -61,12 +61,13 @@ void MainWindow::onOkButtonClicked()
 void MainWindow::update() {
     if (selectedPassenger != nullptr) {
         // Enable the group on GUI based on where passenger is
-        if (selectedPassenger->isInside())
+        if (selectedPassenger->getCurrentElevator() != nullptr)
         {
             ui->elevatorGroupBox->setEnabled(true);
             ui->floorGroupBox->setEnabled(false);
+            ui->floorNumberLabel->setText("Current floor: " + QString::number(selectedPassenger->getCurrentElevator()->getCurrentFloor()->getFloorNumber()));
         }
-        else if (selectedPassenger->isOutside())
+        else
         {
             ui->floorGroupBox->setEnabled(true);
             ui->elevatorGroupBox->setEnabled(false);

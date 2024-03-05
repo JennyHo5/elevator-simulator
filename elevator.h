@@ -12,7 +12,8 @@ class Elevator: public QObject
 public:
     enum {
         IDLE,
-        MOVING
+        MOVING,
+        READY_TO_MOVE
     };
 
 public:

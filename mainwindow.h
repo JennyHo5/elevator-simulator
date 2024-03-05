@@ -42,6 +42,7 @@ private slots:
 signals:
     void messageReceived(const QString& message);
 
+
 private:
     Ui::MainWindow *ui;
 

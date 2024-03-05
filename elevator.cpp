@@ -27,6 +27,7 @@ void Elevator::openDoor() {
 
 void Elevator::closeDoor() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Closes door on Floor " + QString::number(currentFloor->getFloorNumber()));
+    status = READY_TO_MOVE;
 }
 
 void Elevator::setCurrentFloor(Floor* floor) {

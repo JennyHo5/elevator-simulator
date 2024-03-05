@@ -17,6 +17,7 @@ public:
     bool isWaitingForElevator() const {return beWaitingForElevator;}
 
     Floor* getCurrentFloor() const {return currentFloor;}
+    Elevator* getCurrentElevator() const {return currentElevator;}
     void enterElevator(Elevator*);
     void exitElevator();
     void pressFloorNumber(int floorNumber);
