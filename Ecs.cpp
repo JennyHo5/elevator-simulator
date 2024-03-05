@@ -42,16 +42,21 @@ void ECS::update() {
 
 void ECS::moveIdle() {
     for (FloorRequest& request: floorRequests) {
+            Elevator* closestElevator = nullptr;
+            int closestElevatorGap = 8;
             // Check if there's an idle elevator available
             for (Elevator* elevator: elevators) {
                 if (elevator->getStatus() == Elevator::IDLE) {
-                    // Send the idle elevator to serve the request
-                    //elevator->moveToFloor(request.floor);
-                    moveElevatorToFloor(elevator, request.floor);
-                    removeFloorRequest(&request);
-                    break; // Move to the next request
+                    // Send the idle elevator that is the closest to the requested floor
+                    if (abs(elevator->getCurrentFloor()->getFloorNumber() - request.floor->getFloorNumber()) < closestElevatorGap) {
+                        closestElevator = elevator;
+                        closestElevatorGap = abs(elevator->getCurrentFloor()->getFloorNumber() - request.floor->getFloorNumber());
+                    }
                 }
             }
+            emit messageReceived("[ECS] Chooses Elevator " + QString::number(closestElevator->getElevatorID()) + " to serve the request");
+            moveElevatorToFloor(closestElevator, request.floor);
+            removeFloorRequest(&request);
         }
 }
 
