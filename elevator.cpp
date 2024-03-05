@@ -1,6 +1,6 @@
 #include "Elevator.h"
 
-Elevator::Elevator(int id, Floor* floor, QObject *parent): QObject(parent), elevatorID(id), currentFloor(floor), status(IDLE)
+Elevator::Elevator(int id, Floor* floor, QObject *parent): QObject(parent), elevatorID(id), currentFloor(floor), status(IDLE), doorClosed(true)
 {
 
 }
@@ -11,6 +11,7 @@ void Elevator::ringBell() {
 }
 
 void Elevator::openDoor() {
+    doorClosed = false;
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Opens door on Floor " + QString::number(currentFloor->getFloorNumber()));
     // Create a QTimer object
     QTimer* timer = new QTimer(this);
@@ -27,7 +28,7 @@ void Elevator::openDoor() {
 
 void Elevator::closeDoor() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Closes door on Floor " + QString::number(currentFloor->getFloorNumber()));
-    status = READY_TO_MOVE;
+    doorClosed = true;
 }
 
 void Elevator::setCurrentFloor(Floor* floor) {

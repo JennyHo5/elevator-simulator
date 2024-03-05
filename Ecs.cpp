@@ -111,7 +111,7 @@ void ECS::movePassenger() {
 
 void ECS::handleCarRequest() {
     for (CarRequest& cr: carRequests) {
-        if (cr.elevator->getStatus() == Elevator::READY_TO_MOVE) {
+        if (cr.elevator->isDoorClosed()) {
             moveElevatorToFloor(cr.elevator, cr.floor);
             removeCarRequest(&cr);
         }

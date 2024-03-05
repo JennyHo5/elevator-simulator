@@ -13,7 +13,6 @@ public:
     enum {
         IDLE,
         MOVING,
-        READY_TO_MOVE
     };
 
 public:
@@ -22,6 +21,8 @@ public:
     void setStatus(int newStatus) {status = newStatus;}
     void setCurrentFloorNumber(int floorNumber);
     void setCurrentFloor(Floor* floor);
+
+    bool isDoorClosed() const {return doorClosed;}
     void ringBell();
     void openDoor();
     void closeDoor();
@@ -39,6 +40,7 @@ private:
     Floor* currentFloor;
     int currentFloorNumber;
     int status;
+    bool doorClosed;
 };
 
 #endif // ELEVATOR_H

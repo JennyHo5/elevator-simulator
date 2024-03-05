@@ -70,6 +70,7 @@ void MainWindow::update() {
         else
         {
             ui->floorGroupBox->setEnabled(true);
+            ui->staticFloorNumberLabel->setText("Floor " + QString::number(selectedPassenger->getCurrentFloor()->getFloorNumber()));
             ui->elevatorGroupBox->setEnabled(false);
             // Disable button UP or DOWN based on floor
             if (selectedPassenger->getCurrentFloor()->getFloorNumber() == 1) {
