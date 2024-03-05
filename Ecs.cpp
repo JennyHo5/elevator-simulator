@@ -7,6 +7,10 @@ ECS::ECS(QObject *parent): QObject(parent) {
     timer->start(1000); // Adjust the interval as needed (in milliseconds)
 }
 
+ECS::~ECS() {
+    delete timer;
+}
+
 void ECS::addPassenger(Passenger * p) {
     passengers.push_back(p);
     // Connect ECS with Passenger
@@ -65,6 +69,7 @@ void ECS::moveElevatorToFloor(Elevator * e, Floor * f) {
         // Set status to MOVING
         e->setStatus(Elevator::MOVING);
 
+        // Move floor by floor
         for (int i = 0; i < floorsToMove; i++) {
             if (elevatorFloorNumber > endFloorNumber) {
                 elevatorFloorNumber--;
@@ -131,8 +136,6 @@ void ECS::addCarRequest(int floorNumber, Elevator* e) {
     CarRequest cr = CarRequest{floors[floorNumber - 1], e};
     carRequests.push_back(cr);
     emit messageReceived("[ECS] Adds car request: Elevator " + QString::number(e->getElevatorID()) + " requests to go to Floor " + QString::number(floorNumber));
-    cr.elevator->ringBell();
-    cr.elevator->closeDoor();
 }
 
 void ECS::removeCarRequest(CarRequest *request) {

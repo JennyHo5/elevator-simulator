@@ -29,6 +29,12 @@ void MainWindow::connects() {
     // Elevator buttons
     connect(ui->floor1Button, SIGNAL(pressed()), this, SLOT(onFloor1ButtonClicked()));
     connect(ui->floor2Button, SIGNAL(pressed()), this, SLOT(onFloor2ButtonClicked()));
+    connect(ui->floor3Button, SIGNAL(pressed()), this, SLOT(onFloor3ButtonClicked()));
+    connect(ui->floor4Button, SIGNAL(pressed()), this, SLOT(onFloor4ButtonClicked()));
+    connect(ui->floor5Button, SIGNAL(pressed()), this, SLOT(onFloor5ButtonClicked()));
+    connect(ui->floor6Button, SIGNAL(pressed()), this, SLOT(onFloor6ButtonClicked()));
+    connect(ui->floor7Button, SIGNAL(pressed()), this, SLOT(onFloor7ButtonClicked()));
+
 
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
@@ -105,5 +111,35 @@ void MainWindow::onFloor1ButtonClicked()
 void MainWindow::onFloor2ButtonClicked()
 {
     selectedPassenger->pressFloorNumber(2);
+}
+
+
+void MainWindow::onFloor3ButtonClicked()
+{
+    selectedPassenger->pressFloorNumber(3);
+}
+
+
+void MainWindow::onFloor4ButtonClicked()
+{
+    selectedPassenger->pressFloorNumber(4);
+}
+
+
+void MainWindow::onFloor5ButtonClicked()
+{
+    selectedPassenger->pressFloorNumber(5);
+}
+
+
+void MainWindow::onFloor6ButtonClicked()
+{
+    selectedPassenger->pressFloorNumber(6);
+}
+
+
+void MainWindow::onFloor7ButtonClicked()
+{
+    selectedPassenger->pressFloorNumber(7);
 }
 

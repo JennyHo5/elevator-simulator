@@ -14,10 +14,8 @@ class ECS: public QObject
 
 public:
     explicit ECS(QObject *parent = nullptr);
+    ~ECS();
 
-    ~ECS() {
-        delete timer;
-    }
     void addPassenger(Passenger*);
     Passenger* getPassengerById(int id) {return passengers[id - 1];}
     void addElevator(Elevator*);

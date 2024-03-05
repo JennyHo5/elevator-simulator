@@ -33,6 +33,11 @@ private slots:
 
     void onFloor1ButtonClicked();
     void onFloor2ButtonClicked();
+    void onFloor3ButtonClicked();
+    void onFloor4ButtonClicked();
+    void onFloor5ButtonClicked();
+    void onFloor6ButtonClicked();
+    void onFloor7ButtonClicked();
 
 signals:
     void messageReceived(const QString& message);
