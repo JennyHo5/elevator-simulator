@@ -28,3 +28,21 @@ void Elevator::openDoor() {
 void Elevator::closeDoor() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Closes door on Floor " + QString::number(currentFloor->getFloorNumber()));
 }
+
+void Elevator::setCurrentFloor(Floor* floor) {
+    // Create a QEventLoop object
+    QEventLoop loop;
+
+    // Connect the timer's single-shot timeout signal to the loop's quit() slot
+    QTimer* timer = new QTimer(this);
+    timer->setSingleShot(true);
+    connect(timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+
+    // Set the timer interval to 3 seconds
+    timer->start(1000); // 3000 milliseconds = 3 seconds
+
+    // Set the current floor and enter the event loop
+    currentFloor = floor;
+    loop.exec(); // This line blocks until the timer times out or other events occur
+}
+

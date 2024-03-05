@@ -4,6 +4,7 @@
 #include "floor.h"
 #include <QDebug>
 #include <QTimer>
+#include <QEventLoop>
 
 class Elevator: public QObject
 {
@@ -18,8 +19,8 @@ public:
     Elevator(int id, Floor* floor, QObject *parent = nullptr);
     int getStatus() const {return status;}
     void setStatus(int newStatus) {status = newStatus;}
-    void setCurrentFloorNumber(int floorNumber) {currentFloorNumber = floorNumber;}
-    void setCurrentFloor(Floor* floor) {currentFloor = floor;}
+    void setCurrentFloorNumber(int floorNumber);
+    void setCurrentFloor(Floor* floor);
     void ringBell();
     void openDoor();
     void closeDoor();
