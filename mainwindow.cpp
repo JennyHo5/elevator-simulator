@@ -19,6 +19,7 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     , ecs(ecs)
 {
     selectedPassenger = nullptr;
+    safetyServiceChecked = false;
 
     // Timer for update
     timer = new QTimer(this);
@@ -50,6 +51,27 @@ void MainWindow::connects() {
     connect(ui->floor7Button, SIGNAL(pressed()), this, SLOT(onFloor7ButtonClicked()));
     connect(ui->closeButton, SIGNAL(pressed()), this, SLOT(onCloseButtonClicked()));
     connect(ui->openButton, SIGNAL(pressed()), this, SLOT(onOpenButtonClicked()));
+    connect(ui->helpButton, SIGNAL(pressed()), this, SLOT(onHelpButtonClicked()));
+    connect(ui->passengerRespondCheckBox, &QCheckBox::stateChanged, this,
+            [=](int state) {
+              if (state == Qt::Checked) {
+                  selectedElevator->setRespond(true);
+              }
+              else {
+                  selectedElevator->setRespond(false);
+              }
+            });
+
+    // Admin buttons
+    connect(ui->safetyServiceCheckBox, &QCheckBox::stateChanged, this,
+            [=](int state) {
+              if (state == Qt::Checked) {
+                safetyServiceChecked = true;
+              }
+              else {
+                safetyServiceChecked = false;
+              }
+            });
 
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
@@ -186,5 +208,11 @@ void MainWindow::onCloseButtonClicked()
       selectedElevator->doorTimer->stop();
       selectedElevator->closeDoor(); // Call closeDoor immediately
     }
+}
+
+
+void MainWindow::onHelpButtonClicked()
+{
+    selectedPassenger->pressHelp();
 }
 

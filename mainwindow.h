@@ -21,6 +21,7 @@ class MainWindow : public QMainWindow
 
 public:
     static MainWindow& getInstance(ECS* ecs);
+    bool isSafetyServiceChecked() const {return safetyServiceChecked;}
 
 private:
     explicit MainWindow(ECS* ecs, QWidget *parent = nullptr);
@@ -54,6 +55,7 @@ private slots:
 
     void onOpenButtonClicked();
     void onCloseButtonClicked();
+    void onHelpButtonClicked();
 
 signals:
     void messageReceived(const QString& message);
@@ -66,5 +68,7 @@ private:
     Elevator* selectedElevator;
     ECS* ecs;
     QTimer* timer;
+
+    bool safetyServiceChecked;
 };
 #endif // MAINWINDOW_H

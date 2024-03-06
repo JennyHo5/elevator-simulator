@@ -12,17 +12,19 @@ public:
     ~Passenger();
 
     void pressDirection(Direction);
+    void pressHelp();
+    void pressFloorNumber(int floorNumber);
+
     bool isOutside() const {return beOutside;}
     bool isInside() const {return beInside;}
     bool isWaitingForElevator() const {return beWaitingForElevator;}
 
     Floor* getCurrentFloor() const {return currentFloor;}
     Elevator* getCurrentElevator() const {return currentElevator;}
+    int getRequiredFloorNumber() const {return requiredFloorNumber;}
     void enterElevator(Elevator*);
     void exitElevator();
-    void pressFloorNumber(int floorNumber);
-    int getRequiredFloorNumber() const {return requiredFloorNumber;}
-    void setRequireFloorNumber(int number) {requiredFloorNumber = number;}
+
 
 public slots:
     void updateCurrentFloor(Floor* newFloor);
@@ -30,6 +32,7 @@ public slots:
 signals:
     void messageReceived(const QString& message);
     void floorNumberPressed(int floorNumber, Elevator* elevator);
+    void helpButtonPressed(Elevator* elevator);
 
 
 private:

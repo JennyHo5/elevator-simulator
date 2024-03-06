@@ -27,9 +27,10 @@ public:
     void openDoor();
     void closeDoor();
 
-
     int getElevatorID() const {return elevatorID;}
     Floor* getCurrentFloor() const {return currentFloor;}
+    void setRespond(bool r) {hasRespond = r;}
+    bool getRespond() const {return hasRespond;}
 
 signals:
     void messageReceived(const QString& message);
@@ -42,6 +43,7 @@ private:
     int currentFloorNumber;
     int status;
     bool doorClosed;
+    bool hasRespond;
 
 public:
     QTimer* doorTimer;

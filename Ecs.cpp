@@ -15,6 +15,7 @@ void ECS::addPassenger(Passenger * p) {
     passengers.push_back(p);
     // Connect ECS with Passenger
     connect(p, &Passenger::floorNumberPressed, this, &ECS::addCarRequest);
+    connect(p, &Passenger::helpButtonPressed, this, &ECS::callSafetyService);
 }
 
 void ECS::addElevator(Elevator * e) {
@@ -157,5 +158,35 @@ void ECS::removeCarRequest(CarRequest *request) {
     }
 
     emit messageReceived("[ECS] Removes car request: Elevator " + QString::number(request->elevator->getElevatorID()) + " requests to go to Floor " + QString::number(request->floor->getFloorNumber()));
+}
+
+void ECS::callSafetyService(Elevator *e) {
+    emit messageReceived("[ECS] Calling safety service...");
+    QTimer* safetyServiceTimer = new QTimer(this);
+
+    connect(safetyServiceTimer, &QTimer::timeout, this, [=]() {
+        safetyServiceTimer->deleteLater();
+
+        // Check if user checked the "safety service" checkbox within 5 seconds (replace with actual user interaction logic)
+        if (MainWindow::getInstance(this).isSafetyServiceChecked()) {
+            emit messageReceived("[ECS] Connects voice of the current passenger to safety service");
+            // wait for 5 seconds, if no response from the passenger, call 911
+            QTimer* tempTimer = new QTimer(this);
+            connect(tempTimer, &QTimer::timeout, this, [=]() {
+                tempTimer->deleteLater();
+                if (!e->getRespond()) {
+                    emit messageReceived("[ECS] No response from Passenger. Calling 911..."); // Placeholder for alternate action
+                }
+                else {
+                    emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Responds to Safety Service");
+                }
+            });
+            tempTimer -> start(5000);
+        } else {
+            emit messageReceived("[ECS] Safety service unavailable. Calling 911..."); // Placeholder for alternate action
+        }
+    });
+
+    safetyServiceTimer->start(5000);
 }
 

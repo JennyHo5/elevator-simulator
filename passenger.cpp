@@ -23,6 +23,17 @@ void Passenger::pressDirection(Direction d) {
         emit messageReceived("[Passenger " + QString::number(passengerID) + "] Presses DOWN button on floor " + QString::number(getCurrentFloor()->getFloorNumber()));
 }
 
+void Passenger::pressHelp() {
+    emit helpButtonPressed(currentElevator);
+    emit messageReceived("[Passenger " + QString::number(passengerID) + "] Presses HELP button in elevator " + QString::number(getCurrentElevator()->getElevatorID()));
+}
+
+void Passenger::pressFloorNumber(int floorNumber) {
+    emit floorNumberPressed(floorNumber, currentElevator);
+    requiredFloorNumber = floorNumber;
+    emit messageReceived("[Passenger " + QString::number(passengerID) + "] Presses floor number " + QString::number(floorNumber));
+}
+
 void Passenger::enterElevator(Elevator* e) {
     emit messageReceived("[Pessenger " + QString::number(passengerID) + "] Enters Elevator " + QString::number(e->getElevatorID()) + " on Floor " + QString::number(currentFloor->getFloorNumber()));
     beOutside = false;
@@ -40,12 +51,6 @@ void Passenger::exitElevator() {
     disconnect(currentElevator, &Elevator::currentFloorChanged, this, &Passenger::updateCurrentFloor);
     currentElevator = nullptr;
     requiredFloorNumber = 0;
-}
-
-void Passenger::pressFloorNumber(int floorNumber) {
-    emit floorNumberPressed(floorNumber, currentElevator);
-    requiredFloorNumber = floorNumber;
-    emit messageReceived("[Passenger " + QString::number(passengerID) + "] Presses floor number " + QString::number(floorNumber));
 }
 
 void Passenger::updateCurrentFloor(Floor* newFloor) {

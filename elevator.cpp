@@ -3,6 +3,7 @@
 Elevator::Elevator(int id, Floor* floor, QObject *parent): QObject(parent), elevatorID(id), currentFloor(floor), status(IDLE), doorClosed(true)
 {
     doorTimer = new QTimer(this);
+    hasRespond = false;
     // Connect the timeout signal of the timer to a slot that will close the door and set the elevator status
     connect(doorTimer, &QTimer::timeout, this, [=]() {
         closeDoor();
@@ -30,6 +31,7 @@ void Elevator::closeDoor() {
     ringBell();
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Closes door on Floor " + QString::number(currentFloor->getFloorNumber()));
     doorClosed = true;
+    doorTimer->stop();
 }
 
 void Elevator::setCurrentFloor(Floor* floor) {
@@ -41,11 +43,10 @@ void Elevator::setCurrentFloor(Floor* floor) {
     timer->setSingleShot(true);
     connect(timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 
-    // Set the timer interval to 3 seconds
-    timer->start(1000); // 3000 milliseconds = 3 seconds
+    // Set the timer interval to 2 seconds
+    timer->start(2000);
 
     // Set the current floor and enter the event loop
     currentFloor = floor;
     loop.exec(); // This line blocks until the timer times out or other events occur
 }
-

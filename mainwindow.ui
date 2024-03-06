@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>661</width>
-    <height>630</height>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,18 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="outputGroupBox">
+      <property name="title">
+       <string>Output Console</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QTextEdit" name="outputText"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="0" column="1">
      <widget class="QGroupBox" name="passengerGroupBox">
       <property name="title">
@@ -89,7 +101,50 @@
           <string>Elevator View</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0" rowspan="6">
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="fireElevatorCheckBox">
+            <property name="text">
+             <string>Fire</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="overloadCheckBox">
+            <property name="text">
+             <string>Overload</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="doorObstacleCheckBox">
+            <property name="text">
+             <string>Door obstacle</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QFrame" name="displayFrame">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="floorNumberLabel">
+               <property name="text">
+                <string>Current floor:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTextBrowser" name="displayMessageTextBrowser"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="0" rowspan="8">
            <widget class="QFrame" name="elevatorPanel">
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
@@ -171,86 +226,45 @@
             </layout>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QCheckBox" name="checkBox">
-            <property name="text">
-             <string>Overload</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QCheckBox" name="fireCheckBox_2">
-            <property name="text">
-             <string>Fire</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
-           <widget class="QCheckBox" name="doorObstacleCheckBox">
+           <widget class="QCheckBox" name="passengerRespondCheckBox">
             <property name="text">
-             <string>Door obstacle</string>
+             <string>Respond to SS</string>
             </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QFrame" name="displayFrame">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <item>
-              <widget class="QLabel" name="floorNumberLabel">
-               <property name="text">
-                <string>Current floor:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTextBrowser" name="displayMessageTextBrowser"/>
-             </item>
-            </layout>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QGroupBox" name="adminGroupBox">
-      <property name="title">
-       <string>Admin View</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QCheckBox" name="fireCheckBox">
-         <property name="text">
-          <string>Fire in the building?</string>
+        <widget class="QGroupBox" name="adminGroupBox">
+         <property name="title">
+          <string>Admin View</string>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QCheckBox" name="safetyServiceCheckBox">
+            <property name="text">
+             <string>Safety Service Respond?</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="fireCheckBox">
+            <property name="text">
+             <string>Fire in the building?</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="poweroutCheckBox">
+            <property name="text">
+             <string>Powerout?</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="poweroutCheckBox">
-         <property name="text">
-          <string>Powerout?</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QGroupBox" name="outputGroupBox">
-      <property name="title">
-       <string>Output Console</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QTextEdit" name="outputText"/>
        </item>
       </layout>
      </widget>

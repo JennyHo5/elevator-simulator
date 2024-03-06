@@ -36,6 +36,9 @@ public:
     void movePassenger(); //check for passengers waiting on the same floor as an idle landing elevator and send them to the elevator
     void handleCarRequest();
 
+    // Safety cases
+    void callSafetyService(Elevator* e);
+
 public slots:
     void update();
     void addCarRequest(int floorNumber, Elevator* e);
