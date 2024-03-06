@@ -67,8 +67,20 @@ void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
         emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Is already on Floor " + QString::number(f->getFloorNumber()));
         e->ringBell();
         e->openDoor();
-        e->ringBell();
-        e->closeDoor();
+
+        // Create a QTimer object
+        QTimer* t = new QTimer(this);
+
+        // Connect the timeout signal of the timer to a slot that will close the door and set the elevator status
+        connect(t, &QTimer::timeout, this, [=]() {
+            e->ringBell();
+            e->closeDoor();
+            e->setStatus(Elevator::IDLE);
+            t->deleteLater(); // Delete the timer once it's no longer needed
+        });
+
+        // Start the timer with a 10-second interval
+        t->start(10000); // 10000 milliseconds = 10 seconds
     } else {
         int elevatorFloorNumber = e->getCurrentFloor()->getFloorNumber();
         int endFloorNumber = f->getFloorNumber();
@@ -117,7 +129,7 @@ void ECS::movePassenger() {
         if (passenger->isWaitingForElevator() && passenger->isOutside()) {
             for (Elevator* elevator: elevators) {
                 // If there is an idle elevator that is on the same floor of the passenger, serve the passenger with the elevator
-                if (elevator->getStatus() == Elevator::IDLE && elevator->getCurrentFloor() == passenger->getCurrentFloor()) {
+                if (!elevator->isDoorClosed() && elevator->getCurrentFloor() == passenger->getCurrentFloor()) {
                     passenger->enterElevator(elevator);
                     break;
                 }
