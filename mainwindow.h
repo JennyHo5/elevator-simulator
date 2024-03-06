@@ -28,6 +28,8 @@ private slots:
     void onOkButtonClicked();
     void onUpButtonClicked();
     void onDownButtonClicked();
+    void onElevatorArrivedAtFloor(Elevator*, Floor*);
+
     void updateTextWidget(const QString& message);
     void update();
 
@@ -41,7 +43,6 @@ private slots:
 
 signals:
     void messageReceived(const QString& message);
-
 
 private:
     Ui::MainWindow *ui;

@@ -39,6 +39,8 @@ void MainWindow::connects() {
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
     connect(ecs, &ECS::messageReceived, this, &MainWindow::updateTextWidget);
+    connect(ecs, &ECS::elevatorArrivedAtFloor, this, &MainWindow::onElevatorArrivedAtFloor);
+
     std::vector<Elevator*>* elevators = ecs->getElevators();
     for (auto it = elevators->begin(); it != elevators->end(); it++) {
         connect(*it, &Elevator::messageReceived, this, &MainWindow::updateTextWidget);
@@ -47,7 +49,6 @@ void MainWindow::connects() {
     for (auto it = passengers->begin(); it != passengers->end(); it++) {
         connect(*it, &Passenger::messageReceived, this, &MainWindow::updateTextWidget);
     }
-
 }
 
 
@@ -91,13 +92,23 @@ void MainWindow::update() {
 
 void MainWindow::onUpButtonClicked()
 {
+    ui->upButton->setStyleSheet("background-color: green;");
     selectedPassenger->pressDirection(Direction::UP);
     ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::UP);
 }
 
 void MainWindow::onDownButtonClicked() {
+    ui->downButton->setStyleSheet("background-color: green;");
     selectedPassenger->pressDirection(Direction::DOWN);
     ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::DOWN);
+}
+
+void MainWindow::onElevatorArrivedAtFloor(Elevator* e, Floor* f) {
+    if (f == selectedPassenger->getCurrentFloor())
+    {
+        ui->upButton->setStyleSheet("");
+        ui->downButton->setStyleSheet("");
+    }
 }
 
 void MainWindow::updateTextWidget(const QString& message) {

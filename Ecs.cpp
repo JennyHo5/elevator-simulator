@@ -91,6 +91,8 @@ void ECS::moveElevatorToFloor(Elevator * e, Floor * f) {
         e->openDoor();
         e->setStatus(Elevator::IDLE);
     }
+    // Emit the signal indicating elevator has arrived at a floor
+    emit elevatorArrivedAtFloor(e, f);
 }
 
 void ECS::movePassenger() {

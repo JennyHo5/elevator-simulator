@@ -26,6 +26,7 @@ public:
 
     std::vector<Elevator*>* getElevators() {return &elevators;}
     std::vector<Passenger*>* getPassengers() {return &passengers;}
+    std::vector<Floor*>* getFloors() {return &floors;}
 
     void moveElevatorToFloor(Elevator*, Floor*);
     void moveIdle();
@@ -39,6 +40,7 @@ public slots:
 
 signals:
     void messageReceived(const QString& message);
+    void elevatorArrivedAtFloor(Elevator* e, Floor* floor);
 
 private:
     std::vector<Passenger*> passengers;
