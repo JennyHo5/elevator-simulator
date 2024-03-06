@@ -81,6 +81,8 @@ void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
 
         // Start the timer with a 10-second interval
         t->start(10000); // 10000 milliseconds = 10 seconds
+
+
     } else {
         int elevatorFloorNumber = e->getCurrentFloor()->getFloorNumber();
         int endFloorNumber = f->getFloorNumber();

@@ -41,6 +41,10 @@ private slots:
     void onFloor6ButtonClicked();
     void onFloor7ButtonClicked();
 
+    void onOpenButtonClicked();
+
+    void onCloseButtonClicked();
+
 signals:
     void messageReceived(const QString& message);
 
@@ -49,6 +53,7 @@ private:
 
     int selectedPassengerID;
     Passenger* selectedPassenger;
+    Elevator* selectedElevator;
     ECS* ecs;
     QTimer* timer;
 };

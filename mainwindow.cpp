@@ -34,13 +34,12 @@ void MainWindow::connects() {
     connect(ui->floor5Button, SIGNAL(pressed()), this, SLOT(onFloor5ButtonClicked()));
     connect(ui->floor6Button, SIGNAL(pressed()), this, SLOT(onFloor6ButtonClicked()));
     connect(ui->floor7Button, SIGNAL(pressed()), this, SLOT(onFloor7ButtonClicked()));
-
+    connect(ui->closeButton, SIGNAL(pressed()), this, SLOT(onCloseButtonClicked()));
 
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
     connect(ecs, &ECS::messageReceived, this, &MainWindow::updateTextWidget);
     connect(ecs, &ECS::elevatorArrivedAtFloor, this, &MainWindow::onElevatorArrivedAtFloor);
-
     std::vector<Elevator*>* elevators = ecs->getElevators();
     for (auto it = elevators->begin(); it != elevators->end(); it++) {
         connect(*it, &Elevator::messageReceived, this, &MainWindow::updateTextWidget);
@@ -64,6 +63,7 @@ void MainWindow::update() {
         // Enable the group on GUI based on where passenger is
         if (selectedPassenger->getCurrentElevator() != nullptr)
         {
+            selectedElevator = selectedPassenger->getCurrentElevator();
             ui->elevatorGroupBox->setEnabled(true);
             ui->floorGroupBox->setEnabled(false);
             ui->floorNumberLabel->setText("Current floor: " + QString::number(selectedPassenger->getCurrentElevator()->getCurrentFloor()->getFloorNumber()));
@@ -154,5 +154,20 @@ void MainWindow::onFloor6ButtonClicked()
 void MainWindow::onFloor7ButtonClicked()
 {
     selectedPassenger->pressFloorNumber(7);
+}
+
+
+void MainWindow::onOpenButtonClicked()
+{
+
+}
+
+
+void MainWindow::onCloseButtonClicked()
+{
+    // When close door button clicked and elevator's door is open, close the door immidiantly
+    if (selectedElevator != nullptr && !selectedElevator->isDoorClosed()) {
+        // Should reset the timer in ECS, don't wait for 10 seconds
+    }
 }
 
