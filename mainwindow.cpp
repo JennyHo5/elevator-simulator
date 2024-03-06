@@ -49,6 +49,7 @@ void MainWindow::connects() {
     connect(ui->floor6Button, SIGNAL(pressed()), this, SLOT(onFloor6ButtonClicked()));
     connect(ui->floor7Button, SIGNAL(pressed()), this, SLOT(onFloor7ButtonClicked()));
     connect(ui->closeButton, SIGNAL(pressed()), this, SLOT(onCloseButtonClicked()));
+    connect(ui->openButton, SIGNAL(pressed()), this, SLOT(onOpenButtonClicked()));
 
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
@@ -173,13 +174,15 @@ void MainWindow::onFloor7ButtonClicked()
 
 void MainWindow::onOpenButtonClicked()
 {
-
+    if (selectedElevator && !selectedElevator->isDoorClosed()) {
+        selectedElevator->openDoor();
+    }
 }
 
 
 void MainWindow::onCloseButtonClicked()
 {
-    if (selectedElevator && selectedElevator->doorTimer && !selectedElevator->isDoorClosed()) {
+    if (selectedElevator && !selectedElevator->isDoorClosed()) {
       selectedElevator->doorTimer->stop();
       selectedElevator->closeDoor(); // Call closeDoor immediately
     }

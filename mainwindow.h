@@ -53,7 +53,6 @@ private slots:
     void onFloor7ButtonClicked();
 
     void onOpenButtonClicked();
-
     void onCloseButtonClicked();
 
 signals:
