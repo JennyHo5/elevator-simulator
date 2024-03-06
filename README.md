@@ -9,6 +9,6 @@
 - [ ] Implement fire
 - [ ] Implement overload
 - [ ] Implement powerout
-- [ ] Implement help
+- [x] Implement help
 - [x] Implement open door
 - [x] Implement close door
