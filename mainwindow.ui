@@ -171,17 +171,10 @@
             </layout>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="floorNumberLabel">
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="checkBox">
             <property name="text">
-             <string>Current floor:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="doorObstacleCheckBox">
-            <property name="text">
-             <string>Door obstacle</string>
+             <string>Overload</string>
             </property>
            </widget>
           </item>
@@ -192,22 +185,34 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QCheckBox" name="checkBox">
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="doorObstacleCheckBox">
             <property name="text">
-             <string>Overload</string>
+             <string>Door obstacle</string>
             </property>
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Display Message</string>
+           <widget class="QFrame" name="displayFrame">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
             </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="floorNumberLabel">
+               <property name="text">
+                <string>Current floor:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTextBrowser" name="displayMessageTextBrowser"/>
+             </item>
+            </layout>
            </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QTextBrowser" name="displayMessageTextBrowser"/>
           </item>
          </layout>
         </widget>

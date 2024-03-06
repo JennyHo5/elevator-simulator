@@ -54,20 +54,22 @@ void ECS::moveIdle() {
                     }
                 }
             }
-            emit messageReceived("[ECS] Chooses Elevator " + QString::number(closestElevator->getElevatorID()) + " to serve the request");
-            moveElevatorToFloor(closestElevator, request.floor);
-            removeFloorRequest(&request);
+            if (closestElevator != nullptr) {
+                emit messageReceived("[ECS] Chooses Elevator " + QString::number(closestElevator->getElevatorID()) + " to serve the request");
+                moveElevatorToFloor(closestElevator, request.floor);
+                removeFloorRequest(&request);
+            }
         }
 }
 
-void ECS::moveElevatorToFloor(Elevator * e, Floor * f) {
-    if (e->getCurrentFloor() == f)
-    {
+void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
+    if (e->getCurrentFloor() == f) {
         emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Is already on Floor " + QString::number(f->getFloorNumber()));
         e->ringBell();
         e->openDoor();
-    }
-    else {
+        e->ringBell();
+        e->closeDoor();
+    } else {
         int elevatorFloorNumber = e->getCurrentFloor()->getFloorNumber();
         int endFloorNumber = f->getFloorNumber();
         int floorsToMove = std::abs(elevatorFloorNumber - endFloorNumber);
@@ -89,11 +91,25 @@ void ECS::moveElevatorToFloor(Elevator * e, Floor * f) {
 
         e->ringBell();
         e->openDoor();
-        e->setStatus(Elevator::IDLE);
+        // Create a QTimer object
+        QTimer* t = new QTimer(this);
+
+        // Connect the timeout signal of the timer to a slot that will close the door and set the elevator status
+        connect(t, &QTimer::timeout, this, [=]() {
+            e->ringBell();
+            e->closeDoor();
+            e->setStatus(Elevator::IDLE);
+            t->deleteLater(); // Delete the timer once it's no longer needed
+        });
+
+        // Start the timer with a 10-second interval
+        t->start(10000); // 10000 milliseconds = 10 seconds
     }
-    // Emit the signal indicating elevator has arrived at a floor
+
+    // Emit the signal indicating elevator has arrived at the destination floor
     emit elevatorArrivedAtFloor(e, f);
 }
+
 
 void ECS::movePassenger() {
     for (Passenger* passenger: passengers) {

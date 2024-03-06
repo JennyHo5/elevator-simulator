@@ -35,6 +35,7 @@ signals:
     void messageReceived(const QString& message);
     void currentFloorChanged(Floor* newFloor);
 
+
 private:
     int elevatorID;
     Floor* currentFloor;
