@@ -65,24 +65,7 @@ void ECS::moveIdle() {
 void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
     if (e->getCurrentFloor() == f) {
         emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Is already on Floor " + QString::number(f->getFloorNumber()));
-        e->ringBell();
         e->openDoor();
-
-        // Create a QTimer object
-        QTimer* t = new QTimer(this);
-
-        // Connect the timeout signal of the timer to a slot that will close the door and set the elevator status
-        connect(t, &QTimer::timeout, this, [=]() {
-            e->ringBell();
-            e->closeDoor();
-            e->setStatus(Elevator::IDLE);
-            t->deleteLater(); // Delete the timer once it's no longer needed
-        });
-
-        // Start the timer with a 10-second interval
-        t->start(10000); // 10000 milliseconds = 10 seconds
-
-
     } else {
         int elevatorFloorNumber = e->getCurrentFloor()->getFloorNumber();
         int endFloorNumber = f->getFloorNumber();
@@ -102,22 +85,7 @@ void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
             emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Arrives on Floor " + QString::number(elevatorFloorNumber));
             emit e->currentFloorChanged(e->getCurrentFloor()); // Emit the signal when the current floor changes
         }
-
-        e->ringBell();
-        e->openDoor();
-        // Create a QTimer object
-        QTimer* t = new QTimer(this);
-
-        // Connect the timeout signal of the timer to a slot that will close the door and set the elevator status
-        connect(t, &QTimer::timeout, this, [=]() {
-            e->ringBell();
-            e->closeDoor();
-            e->setStatus(Elevator::IDLE);
-            t->deleteLater(); // Delete the timer once it's no longer needed
-        });
-
-        // Start the timer with a 10-second interval
-        t->start(10000); // 10000 milliseconds = 10 seconds
+        e->openDoor();        
     }
 
     // Emit the signal indicating elevator has arrived at the destination floor

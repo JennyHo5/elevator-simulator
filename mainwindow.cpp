@@ -1,11 +1,25 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+// Initialize the static instance variable
+MainWindow* MainWindow::instance = nullptr;
+
+MainWindow& MainWindow::getInstance(ECS* ecs)
+{
+    // Create the instance if it doesn't exist
+    if (!instance) {
+        instance = new MainWindow(ecs);
+    }
+    return *instance;
+}
+
 MainWindow::MainWindow(ECS* ecs, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , ecs(ecs)
 {
+    selectedPassenger = nullptr;
+
     // Timer for update
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::update); // a QTimer that triggers the update() method every second
@@ -61,7 +75,7 @@ void MainWindow::onOkButtonClicked()
 void MainWindow::update() {
     if (selectedPassenger != nullptr) {
         // Enable the group on GUI based on where passenger is
-        if (selectedPassenger->getCurrentElevator() != nullptr)
+        if (selectedPassenger->getCurrentElevator() != nullptr) // this will return segfault
         {
             selectedElevator = selectedPassenger->getCurrentElevator();
             ui->elevatorGroupBox->setEnabled(true);
@@ -165,9 +179,9 @@ void MainWindow::onOpenButtonClicked()
 
 void MainWindow::onCloseButtonClicked()
 {
-    // When close door button clicked and elevator's door is open, close the door immidiantly
-    if (selectedElevator != nullptr && !selectedElevator->isDoorClosed()) {
-        // Should reset the timer in ECS, don't wait for 10 seconds
+    if (selectedElevator && selectedElevator->doorTimer && !selectedElevator->isDoorClosed()) {
+      selectedElevator->doorTimer->stop();
+      selectedElevator->closeDoor(); // Call closeDoor immediately
     }
 }
 

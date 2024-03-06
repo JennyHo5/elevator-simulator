@@ -4,9 +4,12 @@
 #include "passenger.h"
 #include "FloorRequest.h"
 #include "CarRequest.h"
+#include "mainwindow.h"
 #include <QTimer>
 #include <vector>
 #include <QDebug>
+
+class MainWindow;
 
 class ECS: public QObject
 {
@@ -49,6 +52,7 @@ private:
     std::vector<FloorRequest> floorRequests;
     std::vector<CarRequest> carRequests;
     QTimer *timer;
+    QTimer* doorTimer;
 };
 
 #endif // ECS_H

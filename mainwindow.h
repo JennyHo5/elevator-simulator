@@ -13,13 +13,24 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+class ECS;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    static MainWindow& getInstance(ECS* ecs);
+
+private:
     explicit MainWindow(ECS* ecs, QWidget *parent = nullptr);
     ~MainWindow();
+    // Declare the static instance variable
+    static MainWindow* instance;
+
+    // Private copy constructor and assignment operator to prevent cloning and assignment
+    MainWindow(const MainWindow&) = delete;
+    MainWindow& operator=(const MainWindow&) = delete;
 
     void connects(); //Connect singals and slots
 

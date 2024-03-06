@@ -2,7 +2,12 @@
 
 Elevator::Elevator(int id, Floor* floor, QObject *parent): QObject(parent), elevatorID(id), currentFloor(floor), status(IDLE), doorClosed(true)
 {
-
+    doorTimer = new QTimer(this);
+    // Connect the timeout signal of the timer to a slot that will close the door and set the elevator status
+    connect(doorTimer, &QTimer::timeout, this, [=]() {
+        closeDoor();
+        setStatus(Elevator::IDLE);
+    });
 }
 
 
@@ -11,11 +16,18 @@ void Elevator::ringBell() {
 }
 
 void Elevator::openDoor() {
+    ringBell();
     doorClosed = false;
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Opens door on Floor " + QString::number(currentFloor->getFloorNumber()));
+
+    if (doorTimer) {
+      doorTimer->stop(); // Stop if already running
+      doorTimer->start(10000); // Restart the timer
+    }
 }
 
 void Elevator::closeDoor() {
+    ringBell();
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Closes door on Floor " + QString::number(currentFloor->getFloorNumber()));
     doorClosed = true;
 }

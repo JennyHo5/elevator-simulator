@@ -42,6 +42,9 @@ private:
     int currentFloorNumber;
     int status;
     bool doorClosed;
+
+public:
+    QTimer* doorTimer;
 };
 
 #endif // ELEVATOR_H

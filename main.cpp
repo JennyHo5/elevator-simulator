@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     ecs.addFloor(&floor6);
     ecs.addFloor(&floor7);
 
-    MainWindow w(&ecs);
+    MainWindow& w = MainWindow::getInstance(&ecs);
     w.show();
 
 
