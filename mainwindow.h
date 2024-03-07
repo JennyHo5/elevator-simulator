@@ -57,11 +57,15 @@ private slots:
     void onCloseButtonClicked();
     void onHelpButtonClicked();
     void onDoorObstacleClicked();
-    void onBuildingFireButtonClicked();
-    void onElevatorFireAlarmButtonClicked();
+
+    void onFireAlarmElevatorChecked();
+    void onFireAlarmElevatorUnchecked();
+
+    void onFireAlarmChecked();
+    void onFireAlarmUnchecked();
+    void onOverloadChecked();
 
     void displayTextOfDoorObstacle();
-    void displayTextOfFireAlarm();
 
 
 signals:

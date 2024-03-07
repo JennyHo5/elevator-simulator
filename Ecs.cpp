@@ -20,7 +20,6 @@ void ECS::addPassenger(Passenger * p) {
 
 void ECS::addElevator(Elevator * e) {
     elevators.push_back(e);
-    connect(e, &Elevator::fireAlarmWarned, this, &ECS::recieveFireAlarmFromElevator);
 }
 
 void ECS::addFloor(Floor * f) {
@@ -37,8 +36,8 @@ void ECS::addFloorRequest(Floor* f, Direction d) {
 }
 
 void ECS::update() {
-    moveIdle();
     movePassenger();
+    moveIdle(); //handle floor request
     handleCarRequest();
 }
 
@@ -77,6 +76,12 @@ void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
 
         // Move floor by floor
         for (int i = 0; i < floorsToMove; i++) {
+            // if elevator has received a floor alarm, stop immidiantly
+            if (e->getFireAlarm()) {
+                emit messageReceived("[ECS] Stops Elevator " + QString::number(e->getElevatorID()) + " on Floor " + QString::number(e->getCurrentFloor()->getFloorNumber()) + " due to fire alarm");
+                break;
+            }
+
             if (elevatorFloorNumber > endFloorNumber) {
                 elevatorFloorNumber--;
                 e->setCurrentFloor(floors[elevatorFloorNumber - 1]);
@@ -87,7 +92,7 @@ void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
             emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Arrives on Floor " + QString::number(elevatorFloorNumber));
             emit e->currentFloorChanged(e->getCurrentFloor()); // Emit the signal when the current floor changes
         }
-        e->openDoor();        
+        e->openDoor();
     }
 
     // Emit the signal indicating elevator has arrived at the destination floor
@@ -187,15 +192,20 @@ void ECS::callSafetyService(Elevator *e) {
 }
 
 void ECS::recieveFireAlarmFromBuilding() {
-    emit messageReceived("[ECS] Warns fire alarm from the building on audio, moving every elevator to Floor 1 (safe floor)");
-    // Moves every elevator to floor 1 (assume floor 1 is the safe floor)
     for (Elevator* e: elevators) {
-        addCarRequest(1, e);
+        e->setFireAlarm(true);
+    }
+    emit messageReceived("[ECS] Warns fire alarm from the building on audio, moving every elevator to a safe floor");
+}
+
+void ECS::releaseFireAlarmFromBuilding() {
+    for (Elevator* e: elevators) {
+        e->setFireAlarm(false);
     }
 }
 
 void ECS::recieveFireAlarmFromElevator(Elevator *e) {
     emit messageReceived("[ECS] Moving elevator " + QString::number(e->getElevatorID()) + " to Floor 1 (safe floor)");
-    addCarRequest(1, e);
+    e->setFireAlarm(true);
 }
 

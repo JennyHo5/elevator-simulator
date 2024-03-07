@@ -26,20 +26,27 @@ public:
     void ringBell();
     void openDoor();
     void closeDoor();
+    void stop() {status = IDLE;}
 
     void warnObstacle();
-    void warnFireAlarm(Elevator* e);
+    void receiveFireAlarm();
+    void releaseFireAlarm();
+
+    void warnOverload();
 
     int getElevatorID() const {return elevatorID;}
     Floor* getCurrentFloor() const {return currentFloor;}
     void setRespond(bool r) {hasRespond = r;}
     bool getRespond() const {return hasRespond;}
+    void setFireAlarm(bool f) {hasFireAlarm = f;}
+    bool getFireAlarm() const {return hasFireAlarm;}
+
 
 signals:
     void messageReceived(const QString& message);
     void currentFloorChanged(Floor* newFloor);
     void obstacleWarned();
-    void fireAlarmWarned(Elevator* e);
+    void overloadWarned();
 
 private:
     int elevatorID;
@@ -48,6 +55,7 @@ private:
     int status;
     bool doorClosed;
     bool hasRespond;
+    bool hasFireAlarm;
 
 public:
     QTimer* doorTimer;

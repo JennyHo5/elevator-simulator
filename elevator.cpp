@@ -4,6 +4,8 @@ Elevator::Elevator(int id, Floor* floor, QObject *parent): QObject(parent), elev
 {
     doorTimer = new QTimer(this);
     hasRespond = false;
+    hasFireAlarm = false;
+
     // Connect the timeout signal of the timer to a slot that will close the door and set the elevator status
     connect(doorTimer, &QTimer::timeout, this, [=]() {
         closeDoor();
@@ -56,7 +58,16 @@ void Elevator::warnObstacle() {
     emit obstacleWarned();
 }
 
-void Elevator::warnFireAlarm(Elevator* e) {
+void Elevator::receiveFireAlarm() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns fire alarm on audio");
-    emit fireAlarmWarned(e);
+    hasFireAlarm = true;
+}
+
+void Elevator::releaseFireAlarm() {
+    hasFireAlarm = false;
+}
+
+void Elevator::warnOverload() {
+    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns overload on audio");
+    emit overloadWarned();
 }

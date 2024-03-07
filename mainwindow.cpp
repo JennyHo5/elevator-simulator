@@ -63,7 +63,25 @@ void MainWindow::connects() {
               }
             });
     connect(ui->doorObstacleButton, SIGNAL(pressed()), this, SLOT(onDoorObstacleClicked()));
-    connect(ui->elevatorFireAlarmButton, SIGNAL(pressed()), this, SLOT(onElevatorFireAlarmButtonClicked()));
+
+    connect(ui->fireAlarmElevatorCheckBox, &QCheckBox::stateChanged, this,
+            [=] (int state) {
+                if (state == Qt::Checked) {
+                    onFireAlarmElevatorChecked();
+                } else {
+                    onFireAlarmElevatorUnchecked();
+                }
+            });
+
+    connect(ui->overloadCheckBox, &QCheckBox::stateChanged, this,
+            [=] (int state) {
+                if (state == Qt::Checked) {
+                    onOverloadChecked();
+                } else {
+                    ui->warningLabel->setText("");
+                }
+            });
+
 
     // Admin buttons
     connect(ui->safetyServiceCheckBox, &QCheckBox::stateChanged, this,
@@ -75,7 +93,15 @@ void MainWindow::connects() {
                 safetyServiceChecked = false;
               }
             });
-    connect(ui->buildingFireButton, SIGNAL(pressed()), this, SLOT(onBuildingFireButtonClicked()));
+
+    connect(ui->fireAlarmBuildingCheckBox, &QCheckBox::stateChanged, this,
+            [=] (int state) {
+                if (state == Qt::Checked) {
+                    onFireAlarmChecked();
+                } else {
+                    onFireAlarmUnchecked();
+                }
+            });
 
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
@@ -85,7 +111,6 @@ void MainWindow::connects() {
     for (auto it = elevators->begin(); it != elevators->end(); it++) {
         connect(*it, &Elevator::messageReceived, this, &MainWindow::updateTextWidget);
         connect(*it, &Elevator::obstacleWarned, this, &MainWindow::displayTextOfDoorObstacle);
-        connect(*it, &Elevator::fireAlarmWarned, this, &MainWindow::displayTextOfFireAlarm);
     }
     std::vector<Passenger*>* passengers = ecs->getPassengers();
     for (auto it = passengers->begin(); it != passengers->end(); it++) {
@@ -255,33 +280,35 @@ void MainWindow::displayTextOfDoorObstacle() {
     tempTimer->start(3000);
 }
 
-void MainWindow::displayTextOfFireAlarm() {
-    ui->warningLabel->setText("FIRE ALARM");
 
-    QTimer *tempTimer = new QTimer(this);
-
-    connect(tempTimer, &QTimer::timeout, this, [=]() {
-        ui->warningLabel->setText(""); // Reset the text after 3 seconds
-        tempTimer->deleteLater();
-    });
-
-    tempTimer->start(3000);
+void MainWindow::onOverloadChecked() {
+    ui->warningLabel->setText("OVERLOAD, PLEASE REDUCE LOAD");
+    selectedElevator->warnOverload();
 }
 
 
-
-
-
-void MainWindow::onBuildingFireButtonClicked()
+void MainWindow::onFireAlarmChecked()
 {
     ecs->recieveFireAlarmFromBuilding();
-    displayTextOfFireAlarm();
+    ui->warningLabel->setText("FIRE ALARM");
+}
+
+void MainWindow::onFireAlarmUnchecked() {
+    ecs->releaseFireAlarmFromBuilding();
+    ui->warningLabel->setText("");
 }
 
 
-void MainWindow::onElevatorFireAlarmButtonClicked()
+void MainWindow::onFireAlarmElevatorChecked()
 {
-    selectedElevator->warnFireAlarm(selectedElevator);
-    displayTextOfFireAlarm();
+    selectedElevator->receiveFireAlarm();
+    ui->warningLabel->setText("FIRE ALARM");
 }
+
+void MainWindow::onFireAlarmElevatorUnchecked() {
+    selectedElevator->releaseFireAlarm();
+    ui->warningLabel->setText("");
+}
+
+
 

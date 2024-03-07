@@ -39,6 +39,7 @@ public:
     // Safety cases
     void callSafetyService(Elevator* e);
     void recieveFireAlarmFromBuilding();
+    void releaseFireAlarmFromBuilding();
     void recieveFireAlarmFromElevator(Elevator* e);
 
 public slots:
