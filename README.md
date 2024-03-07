@@ -5,7 +5,7 @@
 
 - [x] When the floor direction button is pressed, it should not be able to be pressed again
 
-- [ ] Implement door obstacle
+- [x] Implement door obstacle
 - [ ] Implement fire
 - [ ] Implement overload
 - [ ] Implement powerout

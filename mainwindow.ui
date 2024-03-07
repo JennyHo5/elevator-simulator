@@ -101,29 +101,14 @@
           <string>Elevator View</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="1">
-           <widget class="QCheckBox" name="fireElevatorCheckBox">
-            <property name="text">
-             <string>Fire</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QCheckBox" name="overloadCheckBox">
-            <property name="text">
-             <string>Overload</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QCheckBox" name="doorObstacleCheckBox">
-            <property name="text">
-             <string>Door obstacle</string>
-            </property>
-           </widget>
-          </item>
           <item row="6" column="1">
            <widget class="QFrame" name="displayFrame">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(153, 193, 241);</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -133,13 +118,26 @@
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
               <widget class="QLabel" name="floorNumberLabel">
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255)</string>
+               </property>
                <property name="text">
                 <string>Current floor:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QTextBrowser" name="displayMessageTextBrowser"/>
+              <widget class="QLabel" name="label">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255)</string>
+               </property>
+               <property name="text">
+                <string>Warning:</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -230,6 +228,27 @@
            <widget class="QCheckBox" name="passengerRespondCheckBox">
             <property name="text">
              <string>Respond to SS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="overloadCheckBox">
+            <property name="text">
+             <string>Overload</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="fireElevatorCheckBox">
+            <property name="text">
+             <string>Fire</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="doorObstacleButton">
+            <property name="text">
+             <string>Door Obstacle</string>
             </property>
            </widget>
           </item>

@@ -50,3 +50,7 @@ void Elevator::setCurrentFloor(Floor* floor) {
     currentFloor = floor;
     loop.exec(); // This line blocks until the timer times out or other events occur
 }
+
+void Elevator::warnObstacle() {
+    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns door obstacle on audio");
+}

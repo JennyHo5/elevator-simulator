@@ -20,6 +20,7 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
 {
     selectedPassenger = nullptr;
     safetyServiceChecked = false;
+    obstacleTimer = new QTimer(this);
 
     // Timer for update
     timer = new QTimer(this);
@@ -61,6 +62,7 @@ void MainWindow::connects() {
                   selectedElevator->setRespond(false);
               }
             });
+    connect(ui->doorObstacleButton, SIGNAL(pressed()), this, SLOT(onDoorObstacleClicked()));
 
     // Admin buttons
     connect(ui->safetyServiceCheckBox, &QCheckBox::stateChanged, this,
@@ -104,6 +106,10 @@ void MainWindow::update() {
             ui->elevatorGroupBox->setEnabled(true);
             ui->floorGroupBox->setEnabled(false);
             ui->floorNumberLabel->setText("Current floor: " + QString::number(selectedPassenger->getCurrentElevator()->getCurrentFloor()->getFloorNumber()));
+            if (selectedElevator->isDoorClosed())
+                ui->doorObstacleButton->setEnabled(false);
+            else
+                ui->doorObstacleButton->setEnabled(true);
         }
         else
         {
@@ -215,4 +221,23 @@ void MainWindow::onHelpButtonClicked()
 {
     selectedPassenger->pressHelp();
 }
+
+
+
+void MainWindow::onDoorObstacleClicked()
+{
+    emit messageReceived("[Door Obstacle] Detected in Elevator " + QString::number(selectedElevator->getElevatorID()));
+    if (!obstacleTimer->isActive()) // if the timer hasn't start or already ended, start a new one
+    {
+        obstacleTimer->start(5000);
+        selectedElevator->openDoor();
+    }
+    else { //if the timer has start and hasn't stopped (within 5 seconds)
+        obstacleTimer->stop();
+        selectedElevator->warnObstacle();
+        obstacleTimer->start(5000);
+    }
+}
+
+
 

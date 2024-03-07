@@ -56,6 +56,7 @@ private slots:
     void onOpenButtonClicked();
     void onCloseButtonClicked();
     void onHelpButtonClicked();
+    void onDoorObstacleClicked();
 
 signals:
     void messageReceived(const QString& message);
@@ -68,6 +69,7 @@ private:
     Elevator* selectedElevator;
     ECS* ecs;
     QTimer* timer;
+    QTimer* obstacleTimer;
 
     bool safetyServiceChecked;
 };
