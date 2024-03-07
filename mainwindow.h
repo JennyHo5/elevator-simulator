@@ -58,6 +58,8 @@ private slots:
     void onHelpButtonClicked();
     void onDoorObstacleClicked();
 
+    void displayTextOfDoorObstacle();
+
 signals:
     void messageReceived(const QString& message);
 

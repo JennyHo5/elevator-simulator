@@ -53,4 +53,5 @@ void Elevator::setCurrentFloor(Floor* floor) {
 
 void Elevator::warnObstacle() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns door obstacle on audio");
+    emit obstacleWarned();
 }

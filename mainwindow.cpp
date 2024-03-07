@@ -82,6 +82,7 @@ void MainWindow::connects() {
     std::vector<Elevator*>* elevators = ecs->getElevators();
     for (auto it = elevators->begin(); it != elevators->end(); it++) {
         connect(*it, &Elevator::messageReceived, this, &MainWindow::updateTextWidget);
+        connect(*it, &Elevator::obstacleWarned, this, &MainWindow::displayTextOfDoorObstacle);
     }
     std::vector<Passenger*>* passengers = ecs->getPassengers();
     for (auto it = passengers->begin(); it != passengers->end(); it++) {
@@ -235,9 +236,22 @@ void MainWindow::onDoorObstacleClicked()
     else { //if the timer has start and hasn't stopped (within 5 seconds)
         obstacleTimer->stop();
         selectedElevator->warnObstacle();
-        obstacleTimer->start(5000);
     }
 }
+
+void MainWindow::displayTextOfDoorObstacle() {
+    ui->warningLabel->setText("DOOR OBSTACLE");
+
+    QTimer *tempTimer = new QTimer(this);
+
+    connect(tempTimer, &QTimer::timeout, this, [=]() {
+        ui->warningLabel->setText(""); // Reset the text after 3 seconds
+        tempTimer->deleteLater(); // there is a segfault
+    });
+
+    tempTimer->start(3000);
+}
+
 
 
 

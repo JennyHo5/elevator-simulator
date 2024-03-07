@@ -37,6 +37,7 @@ public:
 signals:
     void messageReceived(const QString& message);
     void currentFloorChanged(Floor* newFloor);
+    void obstacleWarned();
 
 private:
     int elevatorID;

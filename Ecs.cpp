@@ -170,18 +170,13 @@ void ECS::callSafetyService(Elevator *e) {
         // Check if user checked the "safety service" checkbox within 5 seconds (replace with actual user interaction logic)
         if (MainWindow::getInstance(this).isSafetyServiceChecked()) {
             emit messageReceived("[ECS] Connects voice of the current passenger to safety service");
-            // wait for 5 seconds, if no response from the passenger, call 911
-            QTimer* tempTimer = new QTimer(this);
-            connect(tempTimer, &QTimer::timeout, this, [=]() {
-                tempTimer->deleteLater();
-                if (!e->getRespond()) {
-                    emit messageReceived("[ECS] No response from Passenger. Calling 911..."); // Placeholder for alternate action
-                }
-                else {
-                    emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Responds to Safety Service");
-                }
-            });
-            tempTimer -> start(5000);
+            // if no response from the passenger, call 911
+            if (!e->getRespond()) {
+                emit messageReceived("[ECS] No response from Passenger. Calling 911..."); // Placeholder for alternate action
+            }
+            else {
+                emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Responds to Safety Service");
+            }
         } else {
             emit messageReceived("[ECS] Safety service unavailable. Calling 911..."); // Placeholder for alternate action
         }
