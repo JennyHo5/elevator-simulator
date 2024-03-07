@@ -57,8 +57,12 @@ private slots:
     void onCloseButtonClicked();
     void onHelpButtonClicked();
     void onDoorObstacleClicked();
+    void onBuildingFireButtonClicked();
+    void onElevatorFireAlarmButtonClicked();
 
     void displayTextOfDoorObstacle();
+    void displayTextOfFireAlarm();
+
 
 signals:
     void messageReceived(const QString& message);

@@ -55,3 +55,8 @@ void Elevator::warnObstacle() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns door obstacle on audio");
     emit obstacleWarned();
 }
+
+void Elevator::warnFireAlarm(Elevator* e) {
+    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns fire alarm on audio");
+    emit fireAlarmWarned(e);
+}

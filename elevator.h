@@ -28,6 +28,7 @@ public:
     void closeDoor();
 
     void warnObstacle();
+    void warnFireAlarm(Elevator* e);
 
     int getElevatorID() const {return elevatorID;}
     Floor* getCurrentFloor() const {return currentFloor;}
@@ -38,6 +39,7 @@ signals:
     void messageReceived(const QString& message);
     void currentFloorChanged(Floor* newFloor);
     void obstacleWarned();
+    void fireAlarmWarned(Elevator* e);
 
 private:
     int elevatorID;

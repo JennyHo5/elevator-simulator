@@ -20,6 +20,7 @@ void ECS::addPassenger(Passenger * p) {
 
 void ECS::addElevator(Elevator * e) {
     elevators.push_back(e);
+    connect(e, &Elevator::fireAlarmWarned, this, &ECS::recieveFireAlarmFromElevator);
 }
 
 void ECS::addFloor(Floor * f) {
@@ -116,10 +117,10 @@ void ECS::movePassenger() {
 }
 
 void ECS::handleCarRequest() {
-    for (CarRequest& cr: carRequests) {
-        if (cr.elevator->isDoorClosed()) {
-            moveElevatorToFloor(cr.elevator, cr.floor);
-            removeCarRequest(&cr);
+    for (size_t i = 0; i < carRequests.size(); i++) {
+        if (carRequests[i].elevator->isDoorClosed()) {
+            moveElevatorToFloor(carRequests[i].elevator, carRequests[i].floor);
+            removeCarRequest(&carRequests[i]);
         }
     }
 }
@@ -147,6 +148,8 @@ void ECS::addCarRequest(int floorNumber, Elevator* e) {
 }
 
 void ECS::removeCarRequest(CarRequest *request) {
+    emit messageReceived("[ECS] Removes car request: Elevator " + QString::number(request->elevator->getElevatorID()) + " requests to go to Floor " + QString::number(request->floor->getFloorNumber()));
+
     size_t i = 0;
     for (; i < carRequests.size(); i++) {
         if(&carRequests[i] == request) {
@@ -156,8 +159,6 @@ void ECS::removeCarRequest(CarRequest *request) {
     if (i < carRequests.size()) {
         carRequests.erase(carRequests.begin() + i);
     }
-
-    emit messageReceived("[ECS] Removes car request: Elevator " + QString::number(request->elevator->getElevatorID()) + " requests to go to Floor " + QString::number(request->floor->getFloorNumber()));
 }
 
 void ECS::callSafetyService(Elevator *e) {
@@ -183,5 +184,18 @@ void ECS::callSafetyService(Elevator *e) {
     });
 
     safetyServiceTimer->start(5000);
+}
+
+void ECS::recieveFireAlarmFromBuilding() {
+    emit messageReceived("[ECS] Warns fire alarm from the building on audio, moving every elevator to Floor 1 (safe floor)");
+    // Moves every elevator to floor 1 (assume floor 1 is the safe floor)
+    for (Elevator* e: elevators) {
+        addCarRequest(1, e);
+    }
+}
+
+void ECS::recieveFireAlarmFromElevator(Elevator *e) {
+    emit messageReceived("[ECS] Moving elevator " + QString::number(e->getElevatorID()) + " to Floor 1 (safe floor)");
+    addCarRequest(1, e);
 }
 

@@ -63,6 +63,7 @@ void MainWindow::connects() {
               }
             });
     connect(ui->doorObstacleButton, SIGNAL(pressed()), this, SLOT(onDoorObstacleClicked()));
+    connect(ui->elevatorFireAlarmButton, SIGNAL(pressed()), this, SLOT(onElevatorFireAlarmButtonClicked()));
 
     // Admin buttons
     connect(ui->safetyServiceCheckBox, &QCheckBox::stateChanged, this,
@@ -74,6 +75,7 @@ void MainWindow::connects() {
                 safetyServiceChecked = false;
               }
             });
+    connect(ui->buildingFireButton, SIGNAL(pressed()), this, SLOT(onBuildingFireButtonClicked()));
 
     // Update console output text
     connect(this, &MainWindow::messageReceived, this, &MainWindow::updateTextWidget);
@@ -83,6 +85,7 @@ void MainWindow::connects() {
     for (auto it = elevators->begin(); it != elevators->end(); it++) {
         connect(*it, &Elevator::messageReceived, this, &MainWindow::updateTextWidget);
         connect(*it, &Elevator::obstacleWarned, this, &MainWindow::displayTextOfDoorObstacle);
+        connect(*it, &Elevator::fireAlarmWarned, this, &MainWindow::displayTextOfFireAlarm);
     }
     std::vector<Passenger*>* passengers = ecs->getPassengers();
     for (auto it = passengers->begin(); it != passengers->end(); it++) {
@@ -148,7 +151,7 @@ void MainWindow::onDownButtonClicked() {
 }
 
 void MainWindow::onElevatorArrivedAtFloor(Elevator* e, Floor* f) {
-    if (f == selectedPassenger->getCurrentFloor())
+    if (selectedPassenger->getCurrentFloor() != nullptr && f == selectedPassenger->getCurrentFloor())
     {
         ui->upButton->setStyleSheet("");
         ui->downButton->setStyleSheet("");
@@ -246,7 +249,20 @@ void MainWindow::displayTextOfDoorObstacle() {
 
     connect(tempTimer, &QTimer::timeout, this, [=]() {
         ui->warningLabel->setText(""); // Reset the text after 3 seconds
-        tempTimer->deleteLater(); // there is a segfault
+        tempTimer->deleteLater();
+    });
+
+    tempTimer->start(3000);
+}
+
+void MainWindow::displayTextOfFireAlarm() {
+    ui->warningLabel->setText("FIRE ALARM");
+
+    QTimer *tempTimer = new QTimer(this);
+
+    connect(tempTimer, &QTimer::timeout, this, [=]() {
+        ui->warningLabel->setText(""); // Reset the text after 3 seconds
+        tempTimer->deleteLater();
     });
 
     tempTimer->start(3000);
@@ -254,4 +270,18 @@ void MainWindow::displayTextOfDoorObstacle() {
 
 
 
+
+
+void MainWindow::onBuildingFireButtonClicked()
+{
+    ecs->recieveFireAlarmFromBuilding();
+    displayTextOfFireAlarm();
+}
+
+
+void MainWindow::onElevatorFireAlarmButtonClicked()
+{
+    selectedElevator->warnFireAlarm(selectedElevator);
+    displayTextOfFireAlarm();
+}
 
