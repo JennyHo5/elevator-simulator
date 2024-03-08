@@ -7,8 +7,8 @@
 
 - [x] Implement door obstacle
 - [x] Implement fire
-- [ ] Implement overload
-- [ ] Implement powerout
+- [x] Implement overload
+- [x] Implement powerout
 - [x] Implement help
 - [x] Implement open door
 - [x] Implement close door

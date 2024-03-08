@@ -40,6 +40,8 @@ public:
     void callSafetyService(Elevator* e);
     void recieveFireAlarmFromBuilding();
     void releaseFireAlarmFromBuilding();
+    void recievePowerout();
+    void releasePowerout();
     void recieveFireAlarmFromElevator(Elevator* e);
 
 public slots:
@@ -59,6 +61,8 @@ private:
     std::vector<CarRequest> carRequests;
     QTimer *timer;
     QTimer* doorTimer;
+    bool buildingFireAlarm;
+    bool buildingPowerout;
 };
 
 #endif // ECS_H

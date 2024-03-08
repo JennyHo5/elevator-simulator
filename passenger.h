@@ -22,6 +22,7 @@ public:
     Floor* getCurrentFloor() const {return currentFloor;}
     Elevator* getCurrentElevator() const {return currentElevator;}
     int getRequiredFloorNumber() const {return requiredFloorNumber;}
+    void setRequiredFloorNumber(int f) {requiredFloorNumber = f;}
     void enterElevator(Elevator*);
     void exitElevator();
 

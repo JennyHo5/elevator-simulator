@@ -73,12 +73,13 @@ void MainWindow::connects() {
                 }
             });
 
+
     connect(ui->overloadCheckBox, &QCheckBox::stateChanged, this,
             [=] (int state) {
                 if (state == Qt::Checked) {
                     onOverloadChecked();
                 } else {
-                    ui->warningLabel->setText("");
+                    onOverloadUnchecked();
                 }
             });
 
@@ -100,6 +101,15 @@ void MainWindow::connects() {
                     onFireAlarmChecked();
                 } else {
                     onFireAlarmUnchecked();
+                }
+            });
+
+    connect(ui->poweroutCheckBox, &QCheckBox::stateChanged, this,
+            [=] (int state){
+                if (state == Qt::Checked) {
+                    onPoweroutChecked();
+                } else {
+                    onPoweroutUnchecked();
                 }
             });
 
@@ -283,14 +293,19 @@ void MainWindow::displayTextOfDoorObstacle() {
 
 void MainWindow::onOverloadChecked() {
     ui->warningLabel->setText("OVERLOAD, PLEASE REDUCE LOAD");
-    selectedElevator->warnOverload();
+    selectedElevator->receiveOverload();
+}
+
+void MainWindow::onOverloadUnchecked() {
+    ui->warningLabel->setText("");
+    selectedElevator->releaseOverload();
 }
 
 
 void MainWindow::onFireAlarmChecked()
 {
     ecs->recieveFireAlarmFromBuilding();
-    ui->warningLabel->setText("FIRE ALARM");
+    ui->warningLabel->setText("FIRE ALARM, PLEASE EXIT");
 }
 
 void MainWindow::onFireAlarmUnchecked() {
@@ -298,11 +313,21 @@ void MainWindow::onFireAlarmUnchecked() {
     ui->warningLabel->setText("");
 }
 
+void MainWindow::onPoweroutChecked() {
+    ecs->recievePowerout();
+    ui->warningLabel->setText("POWEROUT, PLEASE EXIT");
+}
+
+void MainWindow::onPoweroutUnchecked() {
+    ecs->releasePowerout();
+    ui->warningLabel->setText("");
+}
+
 
 void MainWindow::onFireAlarmElevatorChecked()
 {
     selectedElevator->receiveFireAlarm();
-    ui->warningLabel->setText("FIRE ALARM");
+    ui->warningLabel->setText("FIRE ALARM, PLEASE EXIT");
 }
 
 void MainWindow::onFireAlarmElevatorUnchecked() {

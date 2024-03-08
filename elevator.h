@@ -32,7 +32,8 @@ public:
     void receiveFireAlarm();
     void releaseFireAlarm();
 
-    void warnOverload();
+    void receiveOverload();
+    void releaseOverload();
 
     int getElevatorID() const {return elevatorID;}
     Floor* getCurrentFloor() const {return currentFloor;}
@@ -40,13 +41,17 @@ public:
     bool getRespond() const {return hasRespond;}
     void setFireAlarm(bool f) {hasFireAlarm = f;}
     bool getFireAlarm() const {return hasFireAlarm;}
+    void setPowerout(bool p) {isPowerout = p;}
+    bool getPowerout() const {return isPowerout;}
+
+    bool getOverload() const {return isOverload;}
 
 
 signals:
     void messageReceived(const QString& message);
     void currentFloorChanged(Floor* newFloor);
     void obstacleWarned();
-    void overloadWarned();
+    void overloadReleased();
 
 private:
     int elevatorID;
@@ -56,6 +61,8 @@ private:
     bool doorClosed;
     bool hasRespond;
     bool hasFireAlarm;
+    bool isOverload;
+    bool isPowerout;
 
 public:
     QTimer* doorTimer;

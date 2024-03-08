@@ -5,6 +5,8 @@ ECS::ECS(QObject *parent): QObject(parent) {
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &ECS::update);
     timer->start(1000); // Adjust the interval as needed (in milliseconds)
+    buildingFireAlarm = false;
+    buildingPowerout = false;
 }
 
 ECS::~ECS() {
@@ -20,6 +22,7 @@ void ECS::addPassenger(Passenger * p) {
 
 void ECS::addElevator(Elevator * e) {
     elevators.push_back(e);
+    connect(e, &Elevator::overloadReleased, this, &ECS::handleCarRequest);
 }
 
 void ECS::addFloor(Floor * f) {
@@ -64,6 +67,7 @@ void ECS::moveIdle() {
 }
 
 void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
+
     if (e->getCurrentFloor() == f) {
         emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Is already on Floor " + QString::number(f->getFloorNumber()));
         e->openDoor();
@@ -79,6 +83,12 @@ void ECS::moveElevatorToFloor(Elevator *e, Floor *f) {
             // if elevator has received a floor alarm, stop immidiantly
             if (e->getFireAlarm()) {
                 emit messageReceived("[ECS] Stops Elevator " + QString::number(e->getElevatorID()) + " on Floor " + QString::number(e->getCurrentFloor()->getFloorNumber()) + " due to fire alarm");
+                break;
+            }
+
+            // if elevator has received a powerout, stop immidiantly
+            if (e->getPowerout()) {
+                emit messageReceived("[ECS] Stops Elevator " + QString::number(e->getElevatorID()) + " on Floor " + QString::number(e->getCurrentFloor()->getFloorNumber()) + " due to powerout");
                 break;
             }
 
@@ -114,8 +124,13 @@ void ECS::movePassenger() {
         }
         else {
             // Move passenger that arrives on the destinated floor out
-            if (passenger->getCurrentFloor()->getFloorNumber() == passenger->getRequiredFloorNumber() && passenger->isInside()) {
-                passenger->exitElevator();
+            if (passenger->getCurrentElevator() != nullptr)
+            {
+                if (passenger->getCurrentFloor()->getFloorNumber() == passenger->getRequiredFloorNumber() && passenger->isInside()) {
+                    passenger->exitElevator();
+                } else if ((buildingFireAlarm || buildingPowerout || passenger->getCurrentElevator()->getFireAlarm()) && !passenger->getCurrentElevator()->isDoorClosed()) {// else if powerout and fire, and the door is open, then exit
+                    passenger->exitElevator();
+                }
             }
         }
     }
@@ -123,6 +138,9 @@ void ECS::movePassenger() {
 
 void ECS::handleCarRequest() {
     for (size_t i = 0; i < carRequests.size(); i++) {
+        if (carRequests[i].elevator->getOverload()) { // if the elevator is overload, don't handle the car request
+            break;
+        }
         if (carRequests[i].elevator->isDoorClosed()) {
             moveElevatorToFloor(carRequests[i].elevator, carRequests[i].floor);
             removeCarRequest(&carRequests[i]);
@@ -192,6 +210,7 @@ void ECS::callSafetyService(Elevator *e) {
 }
 
 void ECS::recieveFireAlarmFromBuilding() {
+    buildingFireAlarm = true;
     for (Elevator* e: elevators) {
         e->setFireAlarm(true);
     }
@@ -199,8 +218,24 @@ void ECS::recieveFireAlarmFromBuilding() {
 }
 
 void ECS::releaseFireAlarmFromBuilding() {
+    buildingFireAlarm = false;
     for (Elevator* e: elevators) {
         e->setFireAlarm(false);
+    }
+}
+
+void ECS::recievePowerout() {
+    buildingPowerout = true;
+    for (Elevator *e: elevators) {
+        e->setPowerout(true);
+    }
+    emit messageReceived("[ECS] Warns powerout on audio, moving every elevator to a safe floor");
+}
+
+void ECS::releasePowerout() {
+    buildingPowerout = false;
+    for (Elevator* e: elevators) {
+        e->setPowerout(false);
     }
 }
 

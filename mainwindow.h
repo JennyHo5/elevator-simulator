@@ -63,7 +63,12 @@ private slots:
 
     void onFireAlarmChecked();
     void onFireAlarmUnchecked();
+
+    void onPoweroutChecked();
+    void onPoweroutUnchecked();
+
     void onOverloadChecked();
+    void onOverloadUnchecked();
 
     void displayTextOfDoorObstacle();
 
