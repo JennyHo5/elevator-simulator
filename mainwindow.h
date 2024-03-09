@@ -34,6 +34,8 @@ private:
     MainWindow& operator=(const MainWindow&) = delete;
 
     void connects(); //Connect singals and slots
+    void illuminate(QPushButton*);
+    void cancelIlluminate(QPushButton*);
 
 
 private slots:

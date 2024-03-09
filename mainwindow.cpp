@@ -174,22 +174,30 @@ void MainWindow::update() {
 
 void MainWindow::onUpButtonClicked()
 {
-    ui->upButton->setStyleSheet("background-color: green;");
+    illuminate(ui->upButton);
     selectedPassenger->pressDirection(Direction::UP);
     ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::UP);
 }
 
 void MainWindow::onDownButtonClicked() {
-    ui->downButton->setStyleSheet("background-color: green;");
+    illuminate(ui->downButton);
     selectedPassenger->pressDirection(Direction::DOWN);
     ecs->addFloorRequest(selectedPassenger->getCurrentFloor(), Direction::DOWN);
+}
+
+void MainWindow::illuminate(QPushButton * button) {
+    button->setStyleSheet("background-color: green;");
+}
+
+void MainWindow::cancelIlluminate(QPushButton * button) {
+    button->setStyleSheet("");
 }
 
 void MainWindow::onElevatorArrivedAtFloor(Elevator* e, Floor* f) {
     if (selectedPassenger->getCurrentFloor() != nullptr && f == selectedPassenger->getCurrentFloor())
     {
-        ui->upButton->setStyleSheet("");
-        ui->downButton->setStyleSheet("");
+        cancelIlluminate(ui->upButton);
+        cancelIlluminate(ui->downButton);
     }
 }
 

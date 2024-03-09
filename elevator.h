@@ -17,10 +17,7 @@ public:
 
 public:
     Elevator(int id, Floor* floor, QObject *parent = nullptr);
-    int getStatus() const {return status;}
-    void setStatus(int newStatus) {status = newStatus;}
-    void setCurrentFloorNumber(int floorNumber);
-    void setCurrentFloor(Floor* floor);
+
 
     bool isDoorClosed() const {return doorClosed;}
     void ringBell();
@@ -35,6 +32,11 @@ public:
     void receiveOverload();
     void releaseOverload();
 
+    // getters and setters
+    int getStatus() const {return status;}
+    void setStatus(int newStatus) {status = newStatus;}
+    void setCurrentFloorNumber(int floorNumber);
+    void setCurrentFloor(Floor* floor);
     int getElevatorID() const {return elevatorID;}
     Floor* getCurrentFloor() const {return currentFloor;}
     void setRespond(bool r) {hasRespond = r;}
@@ -43,7 +45,6 @@ public:
     bool getFireAlarm() const {return hasFireAlarm;}
     void setPowerout(bool p) {isPowerout = p;}
     bool getPowerout() const {return isPowerout;}
-
     bool getOverload() const {return isOverload;}
 
 
