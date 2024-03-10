@@ -38,6 +38,8 @@ public:
 
     // Safety cases
     void callSafetyService(Elevator* e);
+    void safetyServiceRespond();
+    void call911();
     void recieveFireAlarmFromBuilding();
     void releaseFireAlarmFromBuilding();
     void recievePowerout();

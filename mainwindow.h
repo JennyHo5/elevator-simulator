@@ -86,7 +86,7 @@ private:
     Elevator* selectedElevator;
     ECS* ecs;
     QTimer* timer;
-    QTimer* obstacleTimer;
+
 
     bool safetyServiceChecked;
 };

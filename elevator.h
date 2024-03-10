@@ -25,6 +25,7 @@ public:
     void closeDoor();
     void stop() {status = IDLE;}
 
+    void obstacleDetected();
     void warnObstacle();
     void receiveFireAlarm();
     void releaseFireAlarm();
@@ -67,6 +68,7 @@ private:
 
 public:
     QTimer* doorTimer;
+    QTimer* obstacleTimer;
 };
 
 #endif // ELEVATOR_H

@@ -3,6 +3,8 @@
 Elevator::Elevator(int id, Floor* floor, QObject *parent): QObject(parent), elevatorID(id), currentFloor(floor), status(IDLE), doorClosed(true)
 {
     doorTimer = new QTimer(this);
+    obstacleTimer = new QTimer(this);
+
     hasRespond = false;
     hasFireAlarm = false;
     isOverload = false;
@@ -55,13 +57,26 @@ void Elevator::setCurrentFloor(Floor* floor) {
     loop.exec(); // This line blocks until the timer times out or other events occur
 }
 
+void Elevator::obstacleDetected() {
+    if (!obstacleTimer->isActive()) // if the timer hasn't start or already ended, start a new one
+    {
+        obstacleTimer->start(5000);
+        openDoor();
+    }
+    else { //if the timer has start and hasn't stopped (within 5 seconds)
+        obstacleTimer->stop();
+        warnObstacle();
+        openDoor();
+    }
+}
+
 void Elevator::warnObstacle() {
-    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns door obstacle on audio");
+    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] [Audio] Warns door obstacle on audio");
     emit obstacleWarned();
 }
 
 void Elevator::receiveFireAlarm() {
-    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns fire alarm on audio");
+    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] [Audio] Warns fire alarm on audio");
     hasFireAlarm = true;
 }
 
@@ -70,7 +85,7 @@ void Elevator::releaseFireAlarm() {
 }
 
 void Elevator::receiveOverload() {
-    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Warns overload on audio");
+    emit messageReceived("[Elevator " + QString::number(elevatorID) + "] [Audio] Warns overload on audio");
     isOverload = true;
 }
 

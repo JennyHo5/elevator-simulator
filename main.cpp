@@ -21,13 +21,13 @@ int main(int argc, char *argv[])
 
     // 3 Elevators are initaly at Floor 1
     Elevator elevator1(1, &floor1);
-    Elevator elevator2(2, &floor1);
-    Elevator elevator3(3, &floor1);
+    Elevator elevator2(2, &floor3);
+    Elevator elevator3(3, &floor6);
 
     // 3 Passengers are initaly at Floor 1
     Passenger passenger1(1, &floor1);
-    Passenger passenger2(2, &floor2);
-    Passenger passenger3(3, &floor6);
+    Passenger passenger2(2, &floor3);
+    Passenger passenger3(3, &floor7);
 
     ECS ecs;
     ecs.addElevator(&elevator1);

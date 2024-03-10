@@ -20,7 +20,6 @@ MainWindow::MainWindow(ECS* ecs, QWidget *parent)
 {
     selectedPassenger = nullptr;
     safetyServiceChecked = false;
-    obstacleTimer = new QTimer(this);
 
     // Timer for update
     timer = new QTimer(this);
@@ -273,16 +272,7 @@ void MainWindow::onHelpButtonClicked()
 
 void MainWindow::onDoorObstacleClicked()
 {
-    emit messageReceived("[Door Obstacle] Detected in Elevator " + QString::number(selectedElevator->getElevatorID()));
-    if (!obstacleTimer->isActive()) // if the timer hasn't start or already ended, start a new one
-    {
-        obstacleTimer->start(5000);
-        selectedElevator->openDoor();
-    }
-    else { //if the timer has start and hasn't stopped (within 5 seconds)
-        obstacleTimer->stop();
-        selectedElevator->warnObstacle();
-    }
+    selectedElevator->obstacleDetected();
 }
 
 void MainWindow::displayTextOfDoorObstacle() {

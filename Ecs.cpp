@@ -184,6 +184,10 @@ void ECS::removeCarRequest(CarRequest *request) {
     }
 }
 
+void ECS::safetyServiceRespond() {
+    emit messageReceived("[ECS] Connects voice of the current passenger to safety service");
+}
+
 void ECS::callSafetyService(Elevator *e) {
     emit messageReceived("[ECS] Calling safety service...");
     QTimer* safetyServiceTimer = new QTimer(this);
@@ -191,18 +195,18 @@ void ECS::callSafetyService(Elevator *e) {
     connect(safetyServiceTimer, &QTimer::timeout, this, [=]() {
         safetyServiceTimer->deleteLater();
 
-        // Check if user checked the "safety service" checkbox within 5 seconds (replace with actual user interaction logic)
+        // Check if user checked the "safety service" checkbox within 5 seconds
         if (MainWindow::getInstance(this).isSafetyServiceChecked()) {
-            emit messageReceived("[ECS] Connects voice of the current passenger to safety service");
+            safetyServiceRespond();
             // if no response from the passenger, call 911
             if (!e->getRespond()) {
-                emit messageReceived("[ECS] No response from Passenger. Calling 911..."); // Placeholder for alternate action
+                emit messageReceived("[ECS] No response from Passenger. Calling 911...");
             }
             else {
                 emit messageReceived("[Elevator " + QString::number(e->getElevatorID()) + "] Responds to Safety Service");
             }
         } else {
-            emit messageReceived("[ECS] Safety service unavailable. Calling 911..."); // Placeholder for alternate action
+            emit messageReceived("[ECS] No response from Safety Service. Calling 911...");
         }
     });
 
@@ -214,7 +218,7 @@ void ECS::recieveFireAlarmFromBuilding() {
     for (Elevator* e: elevators) {
         e->setFireAlarm(true);
     }
-    emit messageReceived("[ECS] Warns fire alarm from the building on audio, moving every elevator to a safe floor");
+    emit messageReceived("[ECS] [Audio] Warns fire alarm from the building on audio, moving every elevator to a safe floor");
 }
 
 void ECS::releaseFireAlarmFromBuilding() {
@@ -229,7 +233,7 @@ void ECS::recievePowerout() {
     for (Elevator *e: elevators) {
         e->setPowerout(true);
     }
-    emit messageReceived("[ECS] Warns powerout on audio, moving every elevator to a safe floor");
+    emit messageReceived("[ECS] [Audio] Warns powerout on audio, moving every elevator to a safe floor");
 }
 
 void ECS::releasePowerout() {
@@ -240,7 +244,7 @@ void ECS::releasePowerout() {
 }
 
 void ECS::recieveFireAlarmFromElevator(Elevator *e) {
-    emit messageReceived("[ECS] Moving elevator " + QString::number(e->getElevatorID()) + " to Floor 1 (safe floor)");
+    emit messageReceived("[ECS] [Audio] Warns fire on audio, moving elevator " + QString::number(e->getElevatorID()) + " to a safe floor");
     e->setFireAlarm(true);
 }
 
