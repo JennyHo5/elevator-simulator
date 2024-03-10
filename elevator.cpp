@@ -87,10 +87,12 @@ void Elevator::releaseFireAlarm() {
 void Elevator::receiveOverload() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] [Audio] Warns overload on audio");
     isOverload = true;
+    doorTimer->stop();
 }
 
 void Elevator::releaseOverload() {
     emit messageReceived("[Elevator " + QString::number(elevatorID) + "] Overload released");
     emit overloadReleased();
     isOverload = false;
+    doorTimer->start(10000);
 }
