@@ -193,6 +193,7 @@ void MainWindow::cancelIlluminate(QPushButton * button) {
 }
 
 void MainWindow::onElevatorArrivedAtFloor(Elevator* e, Floor* f) {
+    (void) e;
     if (selectedPassenger->getCurrentFloor() != nullptr && f == selectedPassenger->getCurrentFloor())
     {
         cancelIlluminate(ui->upButton);
