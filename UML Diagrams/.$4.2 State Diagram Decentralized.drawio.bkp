@@ -1,0 +1,222 @@
+<mxfile host="app.diagrams.net" modified="2024-02-07T20:36:36.690Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="oaUQr9rAYYoQZF47RuYn" version="23.1.2" type="device">
+  <diagram name="Page-1" id="bIp8Ugdy6zTCGoH96MxB">
+    <mxGraphModel dx="1000" dy="610" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="lTQzRiFiYUsJCsqHnS89-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="359.96" y="130" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-4" value="Floor requires the elevator to serve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-4" target="IUsMBDlfbOWoAWYLNI4a-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-4" value="Idle" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="329.3" y="160" width="61.25" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-7" target="lTQzRiFiYUsJCsqHnS89-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="256.92" y="350" />
+              <mxPoint x="359.92" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-17" value="Floor tells the elevator to stop" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-15" vertex="1" connectable="0">
+          <mxGeometry x="-0.2205" y="-1" relative="1" as="geometry">
+            <mxPoint x="-58" y="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-7" value="Moving Up" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="212.42000000000002" y="280" width="90" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-9" target="lTQzRiFiYUsJCsqHnS89-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="462.92" y="350" />
+              <mxPoint x="359.92" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-32" value="Floor tells the elevator to stop" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-16" vertex="1" connectable="0">
+          <mxGeometry x="-0.5851" y="-1" relative="1" as="geometry">
+            <mxPoint x="33" y="11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-9" value="Moving Down" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="417.42" y="280" width="90" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-11" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="344.92" y="100" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="lTQzRiFiYUsJCsqHnS89-14" target="lTQzRiFiYUsJCsqHnS89-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-22" value="Elevator arrives at the destination floor" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-21" vertex="1" connectable="0">
+          <mxGeometry x="-0.21" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-14" value="Stopping" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="317.42" y="370" width="85" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-20" target="lTQzRiFiYUsJCsqHnS89-37" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-41" value="Door fully opened" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-38" vertex="1" connectable="0">
+          <mxGeometry x="-0.2963" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-20" value="Door Opening" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="317.42" y="460" width="85" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-23" target="lTQzRiFiYUsJCsqHnS89-20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="401.92" y="690" />
+              <mxPoint x="484.92" y="690" />
+              <mxPoint x="484.92" y="485" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-27" value="Passenger inside presses Open button/&lt;br&gt;Passenger outside presses Up/Down botton/&lt;br&gt;Door obstacles detected&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-26" vertex="1" connectable="0">
+          <mxGeometry x="0.0073" y="2" relative="1" as="geometry">
+            <mxPoint x="37" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-23" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360.20571428571424" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-49" value="Door closed" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-46" vertex="1" connectable="0">
+          <mxGeometry x="-0.3926" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-23" value="Door Closing" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="317.42" y="680" width="85" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-37" target="lTQzRiFiYUsJCsqHnS89-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-40" value="After 10 seconds/&lt;br&gt;Passenger presses Close button" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-39" vertex="1" connectable="0">
+          <mxGeometry x="-0.3069" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-37" value="Open Door" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="317.42" y="560" width="85" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-48" target="lTQzRiFiYUsJCsqHnS89-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="114.92" y="795" />
+              <mxPoint x="114.92" y="318" />
+              <mxPoint x="212.92000000000002" y="318" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-52" value="Elevator is below the destination floor" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-50" vertex="1" connectable="0">
+          <mxGeometry x="-0.7536" relative="1" as="geometry">
+            <mxPoint x="2" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.007;entryY=0.831;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-48" target="lTQzRiFiYUsJCsqHnS89-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="656" y="795" />
+              <mxPoint x="656" y="322" />
+            </Array>
+            <mxPoint x="434.92" y="794.9999999999998" as="sourcePoint" />
+            <mxPoint x="504.92" y="321" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-53" value="Elevator is above the destination floor" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-51" vertex="1" connectable="0">
+          <mxGeometry x="-0.8562" y="3" relative="1" as="geometry">
+            <mxPoint x="34" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="lTQzRiFiYUsJCsqHnS89-4" edge="1" source="lTQzRiFiYUsJCsqHnS89-48">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="413.92" y="799" />
+              <mxPoint x="734.92" y="799" />
+              <mxPoint x="734.92" y="180" />
+            </Array>
+            <mxPoint x="463.71999999999997" y="798.75" as="sourcePoint" />
+            <mxPoint x="413.7" y="171.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-2" value="No other floor request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="IUsMBDlfbOWoAWYLNI4a-1" vertex="1" connectable="0">
+          <mxGeometry x="-0.8988" y="-2" relative="1" as="geometry">
+            <mxPoint y="11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-48" value="Process the Floor Request" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="306.17" y="770" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="lTQzRiFiYUsJCsqHnS89-37" target="lTQzRiFiYUsJCsqHnS89-37" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="254.92000000000002" y="598" />
+              <mxPoint x="254.92000000000002" y="573" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lTQzRiFiYUsJCsqHnS89-55" value="Overload alarm" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="lTQzRiFiYUsJCsqHnS89-54" vertex="1" connectable="0">
+          <mxGeometry x="-0.0022" y="-3" relative="1" as="geometry">
+            <mxPoint x="-45" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="IUsMBDlfbOWoAWYLNI4a-3" target="lTQzRiFiYUsJCsqHnS89-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-7" value="[Floor is above the elevator]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="IUsMBDlfbOWoAWYLNI4a-5" vertex="1" connectable="0">
+          <mxGeometry x="0.4888" y="1" relative="1" as="geometry">
+            <mxPoint x="-8" y="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="IUsMBDlfbOWoAWYLNI4a-3" target="lTQzRiFiYUsJCsqHnS89-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-8" value="[Floor is below the elevator]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="IUsMBDlfbOWoAWYLNI4a-6" vertex="1" connectable="0">
+          <mxGeometry x="0.6143" y="2" relative="1" as="geometry">
+            <mxPoint x="16" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IUsMBDlfbOWoAWYLNI4a-3" value="" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="333.92" y="230" width="52" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="96jmh4A2vlRixnh7P_mo-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.019;entryY=0.333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="lTQzRiFiYUsJCsqHnS89-7" target="IUsMBDlfbOWoAWYLNI4a-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="114.92" y="305" />
+              <mxPoint x="114.92" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="96jmh4A2vlRixnh7P_mo-6" value="Fire/Help/Power Out alarm" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="96jmh4A2vlRixnh7P_mo-4">
+          <mxGeometry x="-0.312" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="96jmh4A2vlRixnh7P_mo-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.981;entryY=0.333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="lTQzRiFiYUsJCsqHnS89-9" target="IUsMBDlfbOWoAWYLNI4a-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="624.92" y="305" />
+              <mxPoint x="624.92" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="96jmh4A2vlRixnh7P_mo-7" value="Fire/Help/Power Out alarm" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="96jmh4A2vlRixnh7P_mo-5">
+          <mxGeometry x="-0.2588" y="1" relative="1" as="geometry">
+            <mxPoint y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

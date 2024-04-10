@@ -1,0 +1,78 @@
+<mxfile host="Electron" modified="2024-02-12T23:18:58.776Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.0.2 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="mgrc_ifD_iVrfQklgIiZ" version="23.0.2" type="device">
+  <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
+    <mxGraphModel dx="1050" dy="734" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7baba1c4bc27f4b0-6" value="&lt;u&gt;elevator1&lt;/u&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="360" y="80" width="100" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-3" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="7baba1c4bc27f4b0-6" vertex="1">
+          <mxGeometry x="45" y="140" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;elbow=horizontal;" parent="7baba1c4bc27f4b0-6" source="gf-mk5fgO78RV_vx_Tm_-3" target="gf-mk5fgO78RV_vx_Tm_-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-8" value="&lt;u&gt;aBuilding&lt;/u&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="40" y="80" width="100" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="njjIKBGVUexXjN1y7_SK-5" value="&lt;u&gt;ECS&lt;/u&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="170" y="80" width="110" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-1" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="njjIKBGVUexXjN1y7_SK-5" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-2" value="fireAlarm()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" parent="1" source="7baba1c4bc27f4b0-8" target="gf-mk5fgO78RV_vx_Tm_-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="165" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" parent="1" source="gf-mk5fgO78RV_vx_Tm_-1" target="gf-mk5fgO78RV_vx_Tm_-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-5" value="moveToSafeFloor(1)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="gf-mk5fgO78RV_vx_Tm_-4" vertex="1" connectable="0">
+          <mxGeometry x="-0.0568" y="2" relative="1" as="geometry">
+            <mxPoint y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-7" value="warningFire()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="430" y="240" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-8" value="&lt;u&gt;:Elevator&lt;/u&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="290" y="420" width="100" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-34" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="gf-mk5fgO78RV_vx_Tm_-8" vertex="1">
+          <mxGeometry x="45" y="140" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;" parent="gf-mk5fgO78RV_vx_Tm_-8" source="gf-mk5fgO78RV_vx_Tm_-34" target="gf-mk5fgO78RV_vx_Tm_-34" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-12" value="&lt;u&gt;ECS&lt;/u&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="100" y="420" width="110" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="gf-mk5fgO78RV_vx_Tm_-12" vertex="1">
+          <mxGeometry x="51" y="70" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-18" value="[ECS recieves fire alarm from the building]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-19" value="[ECS recieves fire alarm from the elevator]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="50" y="378" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-21" value="sendFireAlarm(carNumber)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=5;" parent="1" source="gf-mk5fgO78RV_vx_Tm_-8" target="gf-mk5fgO78RV_vx_Tm_-20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="231" y="495" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-35" value="moveToSafeFloor(floorNumber)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" parent="1" source="gf-mk5fgO78RV_vx_Tm_-20" target="gf-mk5fgO78RV_vx_Tm_-34" edge="1">
+          <mxGeometry x="0.023" y="15" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gf-mk5fgO78RV_vx_Tm_-37" value="warningFire()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="360" y="580" width="90" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
